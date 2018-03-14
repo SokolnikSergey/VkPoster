@@ -79,9 +79,7 @@ class MainStarter(QObject):
         self.__post_to_group_model.btn_helper_clecked.connect(self.start_helper)
 
     def start_helper(self):
-        print(1)
         os.startfile("..\AuxElements\Helper.chm")
-        print(2)
 
     def check_existing_of_token(self):
         token = self.__vk_session_data.token

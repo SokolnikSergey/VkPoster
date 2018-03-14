@@ -60,8 +60,11 @@ class MyProgressButton(QPushButton):
         self.__painter.end()
 
     def determine_progress(self):
-        self.__progress = (100 - 100 * ((self.__amount_remainded + self.__amount_failed) / (self.__amount_done + self.__amount_remainded + self.__amount_failed)))
-        self.__failgress = (100 - 100 * ((self.__amount_remainded + self.__amount_done) / (self.__amount_done + self.__amount_remainded + self.__amount_failed)))
+        try:
+            self.__progress = (100 - 100 * ((self.__amount_remainded + self.__amount_failed) / (self.__amount_done + self.__amount_remainded + self.__amount_failed)))
+            self.__failgress = (100 - 100 * ((self.__amount_remainded + self.__amount_done) / (self.__amount_done + self.__amount_remainded + self.__amount_failed)))
+        except Exception as ex:
+            print(ex)
 
     def draw_progress_rect(self):
         if(self.__amount_remainded or self.__amount_done):

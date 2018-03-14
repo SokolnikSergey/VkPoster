@@ -43,7 +43,6 @@ class PhotoManager(Subscriber):
                 self.__logger.info("The complience has found")
                 return path
 
-
             path = DataUploadingVkOperations.upload_photo_to_vk(vk_api,
                    DataUploadingVkOperations.getUploadURL(vk_api),
                    PhotoConvertionOperations.convert_image_to_byte_array(photo,self.__temp_photo_buffer))

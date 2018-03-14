@@ -4,7 +4,7 @@ block_cipher = None
 
 
 a = Analysis(['Starter.py'],
-             pathex=['D:\\VkSpammer V1.0\\model\\Start'],
+             pathex=["E:\\Spammers's\\VkSpammerV1_4\\model\\Start"],
              binaries=[],
              datas=[],
              hiddenimports=[],
@@ -25,4 +25,5 @@ exe = EXE(pyz,
           debug=False,
           strip=False,
           upx=True,
+          runtime_tmpdir=None,
           console=False )

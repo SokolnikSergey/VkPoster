@@ -1,3 +1,7 @@
+vk_api_version = "5,73"
+import json
+
+
 class VkOperations:
 
     logger = None
@@ -9,13 +13,14 @@ class VkOperations:
             offset = 0
             while ( len(list_avaliable_groups) < max_amount):
                 list_recieved_groups = VkOperations.get_group_with_offset(vk_api,key_word,100,offset,country_id)
+                print(list_recieved_groups)
                 if list_recieved_groups is not None:
                     if not len(list_recieved_groups):
                         break
 
                 for group in list_recieved_groups:
                     if VkOperations.check_valid_of_group(group,min_amount_users):
-                        list_avaliable_groups.append((group['gid'],group['name'],group['photo']))
+                        list_avaliable_groups.append((group['id'],group['name'],group['photo_50']))
                         if(len(list_avaliable_groups) >= max_amount):
                             break
                 offset += 100
@@ -31,14 +36,15 @@ class VkOperations:
 
     @staticmethod
     def get_group_with_offset(vk_api,key_word,amount,offset,country_id):
-
         try:
+
             groups_list = vk_api.groups.search(q=key_word, count=amount, fields=['can_post','members_count'],offset = offset,
-                                               country_id=country_id)[1:]
+                                               country_id=country_id,v=vk_api_version)['items']
             VkOperations.logger.change_name(VkOperations.__name__)
             VkOperations.logger.info("Groups have got")
             return groups_list
         except Exception as ex:
+            print(ex)
             VkOperations.logger.change_name(VkOperations.__name__)
             VkOperations.logger.exception(ex)
 
@@ -50,11 +56,14 @@ class VkOperations:
 
     @staticmethod
     def  send_post_to_group(vk_api,text,list_of_photos,gid):
-
         photos_id = ''
         for id_of_photo in list_of_photos:
+            print(id_of_photo)
             photos_id += id_of_photo+","
+        print(photos_id)
+
         try:
+
             vk_api.wall.post(owner_id = str(gid * -1),message = text,attachments = photos_id[:-1])
             VkOperations.logger.change_name(VkOperations.__name__)
             VkOperations.logger.info("Post has sent to group (id)->" + str(gid))

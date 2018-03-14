@@ -11,8 +11,6 @@ class DataUploadThread(QThread,QObject):
 
         self.__logger = logger
 
-
-
     @property
     def data(self):
         return self.__data

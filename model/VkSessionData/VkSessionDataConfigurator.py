@@ -1,8 +1,7 @@
 from model.VkAuthorizationModel.ReadWriteToken import ReadWriteToken
 import requests,vk
 from PyQt5.Qt import Qt
-from PyQt5.QtGui import QPixmap,QRegion
-from PyQt5.QtCore import QRect
+from PyQt5.QtGui import QPixmap
 
 class VkSessionDataConfigurator:
     def __init__(self,logger,session_data_container,path_to_token_file):
@@ -54,7 +53,7 @@ class VkSessionDataConfigurator:
 
     def create_vk_api(self, token):
         session = vk.Session(token)
-        vk_api = vk.API(session=session)
+        vk_api = vk.API(session=session,v="5.3")
         return vk_api
 
     def update_account_data(self,new_vk_api):
@@ -86,15 +85,15 @@ class VkSessionDataConfigurator:
         self.__session_data_container.token = token
 
     def set_user_id(self,token):
-        req = self.__session_data_container.vk_api.users.get(access_token=token)
-        uid  = req[0]["uid"]
+        req = self.__session_data_container.vk_api.users.get(access_token=token,v="5.73")
+        uid  = req[0]["id"]
         self.__session_data_container.user_id = uid
 
     def search_album_of_user_by_title(self,title,vk_api):
-        req = vk_api.photos.getAlbums()
+        req = vk_api.photos.getAlbums()["items"]
         for group in req:
             if group["title"] == title:
-                return group["aid"]
+                return group["id"]
 
 
     def set_album_id(self,vk_api):
