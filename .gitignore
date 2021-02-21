@@ -1,7 +1,7 @@
-AuxElements/*
+model/AuxElements/*
 !/AuxElements/Helper.chm
-DB/*
-.idea/
+model/DB/*
+.idea/*
 *.pyc
 
 

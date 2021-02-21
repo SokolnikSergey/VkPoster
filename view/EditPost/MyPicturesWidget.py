@@ -77,7 +77,7 @@ class MyPicturesWidget(QWidget):
 
     def wheelEvent(self, eventWheel):
         if len(self.list_pictures) > 1:
-            if eventWheel.angleDelta().y():
+            if eventWheel.angleDelta().y() > 0:
                 self.scroll_picture(up=True, down=False)
             else:
                 self.scroll_picture(down=True, up=False)
