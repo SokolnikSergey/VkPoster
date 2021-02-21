@@ -950,3 +950,343 @@ vk.exceptions.VkAPIError: 214. Access to adding post denied: access to the wall 
 2018-03-11 17:34:27,911 - DataUploadThread - INFO - Photo has uploaded
 2018-03-11 17:34:28,269 - urllib3.connectionpool - DEBUG - https://api.vk.com:443 "POST /method/wall.post HTTP/1.1" 200 48
 2018-03-11 17:34:28,271 - VkOperations - INFO - Post has sent to group (id)->155201088
+2021-02-21 17:02:09,948 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): api.vk.com:443
+2021-02-21 17:02:10,307 - urllib3.connectionpool - DEBUG - https://api.vk.com:443 "POST /method/photos.getAlbums HTTP/1.1" 200 158
+2021-02-21 17:02:10,309 - VkSessionDataConfigurator - ERROR - 5. User authorization failed: invalid session.. request_params = {'method': 'photos.getAlbums', 'oauth': '1', 'v': '5.3'}
+Traceback (most recent call last):
+  File "/home/sakolnik/Documents/SpammerVK/SpammerVk1_4/model/VkSessionData/VkSessionDataConfigurator.py", line 101, in set_album_id
+    album_aid = self.search_album_of_user_by_title("uploadsPhotos",vk_api)
+  File "/home/sakolnik/Documents/SpammerVK/SpammerVk1_4/model/VkSessionData/VkSessionDataConfigurator.py", line 93, in search_album_of_user_by_title
+    req = vk_api.photos.getAlbums()["items"]
+  File "/home/sakolnik/.local/lib/python3.8/site-packages/vk/api.py", line 173, in __call__
+    return self._api._session.make_request(self)
+  File "/home/sakolnik/.local/lib/python3.8/site-packages/vk/api.py", line 102, in make_request
+    raise error
+vk.exceptions.VkAPIError: 5. User authorization failed: invalid session.. request_params = {'method': 'photos.getAlbums', 'oauth': '1', 'v': '5.3'}
+2021-02-21 17:02:10,409 - urllib3.connectionpool - DEBUG - https://api.vk.com:443 "POST /method/users.get HTTP/1.1" 200 152
+2021-02-21 17:02:10,414 - VkSessionDataConfigurator - ERROR - 5. User authorization failed: invalid session.. request_params = {'method': 'users.get', 'oauth': '1', 'v': '5.73'}
+Traceback (most recent call last):
+  File "/home/sakolnik/Documents/SpammerVK/SpammerVk1_4/model/VkSessionData/VkSessionDataConfigurator.py", line 31, in update_session_data_container_with_new_token
+    self.set_user_id(new_token)
+  File "/home/sakolnik/Documents/SpammerVK/SpammerVk1_4/model/VkSessionData/VkSessionDataConfigurator.py", line 88, in set_user_id
+    req = self.__session_data_container.vk_api.users.get(access_token=token,v="5.73")
+  File "/home/sakolnik/.local/lib/python3.8/site-packages/vk/api.py", line 173, in __call__
+    return self._api._session.make_request(self)
+  File "/home/sakolnik/.local/lib/python3.8/site-packages/vk/api.py", line 102, in make_request
+    raise error
+vk.exceptions.VkAPIError: 5. User authorization failed: invalid session.. request_params = {'method': 'users.get', 'oauth': '1', 'v': '5.73'}
+2021-02-21 17:02:10,651 - VkSessionDataConfigurator - INFO - APP successfully started!
+2021-02-21 17:08:56,130 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): api.vk.com:443
+2021-02-21 17:08:56,500 - urllib3.connectionpool - DEBUG - https://api.vk.com:443 "POST /method/photos.getAlbums HTTP/1.1" 200 158
+2021-02-21 17:08:56,502 - VkSessionDataConfigurator - ERROR - 5. User authorization failed: invalid session.. request_params = {'method': 'photos.getAlbums', 'oauth': '1', 'v': '5.3'}
+Traceback (most recent call last):
+  File "/home/sakolnik/Documents/SpammerVK/SpammerVk1_4/model/VkSessionData/VkSessionDataConfigurator.py", line 101, in set_album_id
+    album_aid = self.search_album_of_user_by_title("uploadsPhotos",vk_api)
+  File "/home/sakolnik/Documents/SpammerVK/SpammerVk1_4/model/VkSessionData/VkSessionDataConfigurator.py", line 93, in search_album_of_user_by_title
+    req = vk_api.photos.getAlbums()["items"]
+  File "/home/sakolnik/.local/lib/python3.8/site-packages/vk/api.py", line 173, in __call__
+    return self._api._session.make_request(self)
+  File "/home/sakolnik/.local/lib/python3.8/site-packages/vk/api.py", line 102, in make_request
+    raise error
+vk.exceptions.VkAPIError: 5. User authorization failed: invalid session.. request_params = {'method': 'photos.getAlbums', 'oauth': '1', 'v': '5.3'}
+2021-02-21 17:08:56,602 - urllib3.connectionpool - DEBUG - https://api.vk.com:443 "POST /method/users.get HTTP/1.1" 200 152
+2021-02-21 17:08:56,603 - VkSessionDataConfigurator - ERROR - 5. User authorization failed: invalid session.. request_params = {'method': 'users.get', 'oauth': '1', 'v': '5.73'}
+Traceback (most recent call last):
+  File "/home/sakolnik/Documents/SpammerVK/SpammerVk1_4/model/VkSessionData/VkSessionDataConfigurator.py", line 31, in update_session_data_container_with_new_token
+    self.set_user_id(new_token)
+  File "/home/sakolnik/Documents/SpammerVK/SpammerVk1_4/model/VkSessionData/VkSessionDataConfigurator.py", line 88, in set_user_id
+    req = self.__session_data_container.vk_api.users.get(access_token=token,v="5.73")
+  File "/home/sakolnik/.local/lib/python3.8/site-packages/vk/api.py", line 173, in __call__
+    return self._api._session.make_request(self)
+  File "/home/sakolnik/.local/lib/python3.8/site-packages/vk/api.py", line 102, in make_request
+    raise error
+vk.exceptions.VkAPIError: 5. User authorization failed: invalid session.. request_params = {'method': 'users.get', 'oauth': '1', 'v': '5.73'}
+2021-02-21 17:08:56,808 - VkSessionDataConfigurator - INFO - APP successfully started!
+2021-02-21 17:09:01,677 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): api.vk.com:443
+2021-02-21 17:09:01,918 - urllib3.connectionpool - DEBUG - https://api.vk.com:443 "POST /method/photos.getAlbums HTTP/1.1" 200 158
+2021-02-21 17:09:01,922 - VkSessionDataConfigurator - ERROR - 5. User authorization failed: invalid session.. request_params = {'method': 'photos.getAlbums', 'oauth': '1', 'v': '5.3'}
+Traceback (most recent call last):
+  File "/home/sakolnik/Documents/SpammerVK/SpammerVk1_4/model/VkSessionData/VkSessionDataConfigurator.py", line 101, in set_album_id
+    album_aid = self.search_album_of_user_by_title("uploadsPhotos",vk_api)
+  File "/home/sakolnik/Documents/SpammerVK/SpammerVk1_4/model/VkSessionData/VkSessionDataConfigurator.py", line 93, in search_album_of_user_by_title
+    req = vk_api.photos.getAlbums()["items"]
+  File "/home/sakolnik/.local/lib/python3.8/site-packages/vk/api.py", line 173, in __call__
+    return self._api._session.make_request(self)
+  File "/home/sakolnik/.local/lib/python3.8/site-packages/vk/api.py", line 102, in make_request
+    raise error
+vk.exceptions.VkAPIError: 5. User authorization failed: invalid session.. request_params = {'method': 'photos.getAlbums', 'oauth': '1', 'v': '5.3'}
+2021-02-21 17:09:02,029 - urllib3.connectionpool - DEBUG - https://api.vk.com:443 "POST /method/users.get HTTP/1.1" 200 152
+2021-02-21 17:09:02,030 - VkSessionDataConfigurator - ERROR - 5. User authorization failed: invalid session.. request_params = {'method': 'users.get', 'oauth': '1', 'v': '5.73'}
+Traceback (most recent call last):
+  File "/home/sakolnik/Documents/SpammerVK/SpammerVk1_4/model/VkSessionData/VkSessionDataConfigurator.py", line 31, in update_session_data_container_with_new_token
+    self.set_user_id(new_token)
+  File "/home/sakolnik/Documents/SpammerVK/SpammerVk1_4/model/VkSessionData/VkSessionDataConfigurator.py", line 88, in set_user_id
+    req = self.__session_data_container.vk_api.users.get(access_token=token,v="5.73")
+  File "/home/sakolnik/.local/lib/python3.8/site-packages/vk/api.py", line 173, in __call__
+    return self._api._session.make_request(self)
+  File "/home/sakolnik/.local/lib/python3.8/site-packages/vk/api.py", line 102, in make_request
+    raise error
+vk.exceptions.VkAPIError: 5. User authorization failed: invalid session.. request_params = {'method': 'users.get', 'oauth': '1', 'v': '5.73'}
+2021-02-21 17:09:02,260 - VkSessionDataConfigurator - INFO - APP successfully started!
+2021-02-21 17:16:56,388 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): api.vk.com:443
+2021-02-21 17:16:56,741 - urllib3.connectionpool - DEBUG - https://api.vk.com:443 "POST /method/photos.getAlbums HTTP/1.1" 200 158
+2021-02-21 17:16:56,747 - VkSessionDataConfigurator - ERROR - 5. User authorization failed: invalid session.. request_params = {'method': 'photos.getAlbums', 'oauth': '1', 'v': '5.3'}
+Traceback (most recent call last):
+  File "/home/sakolnik/Documents/SpammerVK/SpammerVk1_4/model/VkSessionData/VkSessionDataConfigurator.py", line 101, in set_album_id
+    album_aid = self.search_album_of_user_by_title("uploadsPhotos",vk_api)
+  File "/home/sakolnik/Documents/SpammerVK/SpammerVk1_4/model/VkSessionData/VkSessionDataConfigurator.py", line 93, in search_album_of_user_by_title
+    req = vk_api.photos.getAlbums()["items"]
+  File "/home/sakolnik/.local/lib/python3.8/site-packages/vk/api.py", line 173, in __call__
+    return self._api._session.make_request(self)
+  File "/home/sakolnik/.local/lib/python3.8/site-packages/vk/api.py", line 102, in make_request
+    raise error
+vk.exceptions.VkAPIError: 5. User authorization failed: invalid session.. request_params = {'method': 'photos.getAlbums', 'oauth': '1', 'v': '5.3'}
+2021-02-21 17:16:56,842 - urllib3.connectionpool - DEBUG - https://api.vk.com:443 "POST /method/users.get HTTP/1.1" 200 152
+2021-02-21 17:16:56,844 - VkSessionDataConfigurator - ERROR - 5. User authorization failed: invalid session.. request_params = {'method': 'users.get', 'oauth': '1', 'v': '5.73'}
+Traceback (most recent call last):
+  File "/home/sakolnik/Documents/SpammerVK/SpammerVk1_4/model/VkSessionData/VkSessionDataConfigurator.py", line 31, in update_session_data_container_with_new_token
+    self.set_user_id(new_token)
+  File "/home/sakolnik/Documents/SpammerVK/SpammerVk1_4/model/VkSessionData/VkSessionDataConfigurator.py", line 88, in set_user_id
+    req = self.__session_data_container.vk_api.users.get(access_token=token,v="5.73")
+  File "/home/sakolnik/.local/lib/python3.8/site-packages/vk/api.py", line 173, in __call__
+    return self._api._session.make_request(self)
+  File "/home/sakolnik/.local/lib/python3.8/site-packages/vk/api.py", line 102, in make_request
+    raise error
+vk.exceptions.VkAPIError: 5. User authorization failed: invalid session.. request_params = {'method': 'users.get', 'oauth': '1', 'v': '5.73'}
+2021-02-21 17:16:57,047 - VkSessionDataConfigurator - INFO - APP successfully started!
+2021-02-21 17:19:08,432 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): api.vk.com:443
+2021-02-21 17:19:09,458 - urllib3.connectionpool - DEBUG - https://api.vk.com:443 "POST /method/photos.getAlbums HTTP/1.1" 200 158
+2021-02-21 17:19:09,461 - VkSessionDataConfigurator - ERROR - 5. User authorization failed: invalid session.. request_params = {'method': 'photos.getAlbums', 'oauth': '1', 'v': '5.3'}
+Traceback (most recent call last):
+  File "/home/sakolnik/Documents/SpammerVK/SpammerVk1_4/model/VkSessionData/VkSessionDataConfigurator.py", line 101, in set_album_id
+    album_aid = self.search_album_of_user_by_title("uploadsPhotos",vk_api)
+  File "/home/sakolnik/Documents/SpammerVK/SpammerVk1_4/model/VkSessionData/VkSessionDataConfigurator.py", line 93, in search_album_of_user_by_title
+    req = vk_api.photos.getAlbums()["items"]
+  File "/home/sakolnik/.local/lib/python3.8/site-packages/vk/api.py", line 173, in __call__
+    return self._api._session.make_request(self)
+  File "/home/sakolnik/.local/lib/python3.8/site-packages/vk/api.py", line 102, in make_request
+    raise error
+vk.exceptions.VkAPIError: 5. User authorization failed: invalid session.. request_params = {'method': 'photos.getAlbums', 'oauth': '1', 'v': '5.3'}
+2021-02-21 17:19:09,529 - urllib3.connectionpool - DEBUG - https://api.vk.com:443 "POST /method/users.get HTTP/1.1" 200 152
+2021-02-21 17:19:09,534 - VkSessionDataConfigurator - ERROR - 5. User authorization failed: invalid session.. request_params = {'method': 'users.get', 'oauth': '1', 'v': '5.73'}
+Traceback (most recent call last):
+  File "/home/sakolnik/Documents/SpammerVK/SpammerVk1_4/model/VkSessionData/VkSessionDataConfigurator.py", line 31, in update_session_data_container_with_new_token
+    self.set_user_id(new_token)
+  File "/home/sakolnik/Documents/SpammerVK/SpammerVk1_4/model/VkSessionData/VkSessionDataConfigurator.py", line 88, in set_user_id
+    req = self.__session_data_container.vk_api.users.get(access_token=token,v="5.73")
+  File "/home/sakolnik/.local/lib/python3.8/site-packages/vk/api.py", line 173, in __call__
+    return self._api._session.make_request(self)
+  File "/home/sakolnik/.local/lib/python3.8/site-packages/vk/api.py", line 102, in make_request
+    raise error
+vk.exceptions.VkAPIError: 5. User authorization failed: invalid session.. request_params = {'method': 'users.get', 'oauth': '1', 'v': '5.73'}
+2021-02-21 17:19:09,712 - VkSessionDataConfigurator - INFO - APP successfully started!
+2021-02-21 17:20:09,085 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): api.vk.com:443
+2021-02-21 17:20:09,351 - urllib3.connectionpool - DEBUG - https://api.vk.com:443 "POST /method/photos.getAlbums HTTP/1.1" 200 158
+2021-02-21 17:20:09,355 - VkSessionDataConfigurator - ERROR - 5. User authorization failed: invalid session.. request_params = {'method': 'photos.getAlbums', 'oauth': '1', 'v': '5.3'}
+Traceback (most recent call last):
+  File "/home/sakolnik/Documents/SpammerVK/SpammerVk1_4/model/VkSessionData/VkSessionDataConfigurator.py", line 101, in set_album_id
+    album_aid = self.search_album_of_user_by_title("uploadsPhotos",vk_api)
+  File "/home/sakolnik/Documents/SpammerVK/SpammerVk1_4/model/VkSessionData/VkSessionDataConfigurator.py", line 93, in search_album_of_user_by_title
+    req = vk_api.photos.getAlbums()["items"]
+  File "/home/sakolnik/.local/lib/python3.8/site-packages/vk/api.py", line 173, in __call__
+    return self._api._session.make_request(self)
+  File "/home/sakolnik/.local/lib/python3.8/site-packages/vk/api.py", line 102, in make_request
+    raise error
+vk.exceptions.VkAPIError: 5. User authorization failed: invalid session.. request_params = {'method': 'photos.getAlbums', 'oauth': '1', 'v': '5.3'}
+2021-02-21 17:20:09,487 - urllib3.connectionpool - DEBUG - https://api.vk.com:443 "POST /method/users.get HTTP/1.1" 200 152
+2021-02-21 17:20:09,492 - VkSessionDataConfigurator - ERROR - 5. User authorization failed: invalid session.. request_params = {'method': 'users.get', 'oauth': '1', 'v': '5.73'}
+Traceback (most recent call last):
+  File "/home/sakolnik/Documents/SpammerVK/SpammerVk1_4/model/VkSessionData/VkSessionDataConfigurator.py", line 31, in update_session_data_container_with_new_token
+    self.set_user_id(new_token)
+  File "/home/sakolnik/Documents/SpammerVK/SpammerVk1_4/model/VkSessionData/VkSessionDataConfigurator.py", line 88, in set_user_id
+    req = self.__session_data_container.vk_api.users.get(access_token=token,v="5.73")
+  File "/home/sakolnik/.local/lib/python3.8/site-packages/vk/api.py", line 173, in __call__
+    return self._api._session.make_request(self)
+  File "/home/sakolnik/.local/lib/python3.8/site-packages/vk/api.py", line 102, in make_request
+    raise error
+vk.exceptions.VkAPIError: 5. User authorization failed: invalid session.. request_params = {'method': 'users.get', 'oauth': '1', 'v': '5.73'}
+2021-02-21 17:20:09,730 - VkSessionDataConfigurator - INFO - APP successfully started!
+2021-02-21 17:24:24,342 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): api.vk.com:443
+2021-02-21 17:24:24,584 - urllib3.connectionpool - DEBUG - https://api.vk.com:443 "POST /method/photos.getAlbums HTTP/1.1" 200 158
+2021-02-21 17:24:24,585 - VkSessionDataConfigurator - ERROR - 5. User authorization failed: invalid session.. request_params = {'method': 'photos.getAlbums', 'oauth': '1', 'v': '5.3'}
+Traceback (most recent call last):
+  File "/home/sakolnik/Documents/SpammerVK/SpammerVk1_4/model/VkSessionData/VkSessionDataConfigurator.py", line 101, in set_album_id
+    album_aid = self.search_album_of_user_by_title("uploadsPhotos",vk_api)
+  File "/home/sakolnik/Documents/SpammerVK/SpammerVk1_4/model/VkSessionData/VkSessionDataConfigurator.py", line 93, in search_album_of_user_by_title
+    req = vk_api.photos.getAlbums()["items"]
+  File "/home/sakolnik/.local/lib/python3.8/site-packages/vk/api.py", line 173, in __call__
+    return self._api._session.make_request(self)
+  File "/home/sakolnik/.local/lib/python3.8/site-packages/vk/api.py", line 102, in make_request
+    raise error
+vk.exceptions.VkAPIError: 5. User authorization failed: invalid session.. request_params = {'method': 'photos.getAlbums', 'oauth': '1', 'v': '5.3'}
+2021-02-21 17:24:24,727 - urllib3.connectionpool - DEBUG - https://api.vk.com:443 "POST /method/users.get HTTP/1.1" 200 152
+2021-02-21 17:24:24,729 - VkSessionDataConfigurator - ERROR - 5. User authorization failed: invalid session.. request_params = {'method': 'users.get', 'oauth': '1', 'v': '5.73'}
+Traceback (most recent call last):
+  File "/home/sakolnik/Documents/SpammerVK/SpammerVk1_4/model/VkSessionData/VkSessionDataConfigurator.py", line 31, in update_session_data_container_with_new_token
+    self.set_user_id(new_token)
+  File "/home/sakolnik/Documents/SpammerVK/SpammerVk1_4/model/VkSessionData/VkSessionDataConfigurator.py", line 88, in set_user_id
+    req = self.__session_data_container.vk_api.users.get(access_token=token,v="5.73")
+  File "/home/sakolnik/.local/lib/python3.8/site-packages/vk/api.py", line 173, in __call__
+    return self._api._session.make_request(self)
+  File "/home/sakolnik/.local/lib/python3.8/site-packages/vk/api.py", line 102, in make_request
+    raise error
+vk.exceptions.VkAPIError: 5. User authorization failed: invalid session.. request_params = {'method': 'users.get', 'oauth': '1', 'v': '5.73'}
+2021-02-21 17:24:24,967 - VkSessionDataConfigurator - INFO - APP successfully started!
+2021-02-21 17:31:11,896 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): api.vk.com:443
+2021-02-21 17:31:12,156 - urllib3.connectionpool - DEBUG - https://api.vk.com:443 "POST /method/photos.getAlbums HTTP/1.1" 200 158
+2021-02-21 17:31:12,157 - VkSessionDataConfigurator - ERROR - 5. User authorization failed: invalid session.. request_params = {'method': 'photos.getAlbums', 'oauth': '1', 'v': '5.3'}
+Traceback (most recent call last):
+  File "/home/sakolnik/Documents/SpammerVK/SpammerVk1_4/model/VkSessionData/VkSessionDataConfigurator.py", line 101, in set_album_id
+    album_aid = self.search_album_of_user_by_title("uploadsPhotos",vk_api)
+  File "/home/sakolnik/Documents/SpammerVK/SpammerVk1_4/model/VkSessionData/VkSessionDataConfigurator.py", line 93, in search_album_of_user_by_title
+    req = vk_api.photos.getAlbums()["items"]
+  File "/home/sakolnik/.local/lib/python3.8/site-packages/vk/api.py", line 173, in __call__
+    return self._api._session.make_request(self)
+  File "/home/sakolnik/.local/lib/python3.8/site-packages/vk/api.py", line 102, in make_request
+    raise error
+vk.exceptions.VkAPIError: 5. User authorization failed: invalid session.. request_params = {'method': 'photos.getAlbums', 'oauth': '1', 'v': '5.3'}
+2021-02-21 17:31:12,258 - urllib3.connectionpool - DEBUG - https://api.vk.com:443 "POST /method/users.get HTTP/1.1" 200 152
+2021-02-21 17:31:12,259 - VkSessionDataConfigurator - ERROR - 5. User authorization failed: invalid session.. request_params = {'method': 'users.get', 'oauth': '1', 'v': '5.73'}
+Traceback (most recent call last):
+  File "/home/sakolnik/Documents/SpammerVK/SpammerVk1_4/model/VkSessionData/VkSessionDataConfigurator.py", line 31, in update_session_data_container_with_new_token
+    self.set_user_id(new_token)
+  File "/home/sakolnik/Documents/SpammerVK/SpammerVk1_4/model/VkSessionData/VkSessionDataConfigurator.py", line 88, in set_user_id
+    req = self.__session_data_container.vk_api.users.get(access_token=token,v="5.73")
+  File "/home/sakolnik/.local/lib/python3.8/site-packages/vk/api.py", line 173, in __call__
+    return self._api._session.make_request(self)
+  File "/home/sakolnik/.local/lib/python3.8/site-packages/vk/api.py", line 102, in make_request
+    raise error
+vk.exceptions.VkAPIError: 5. User authorization failed: invalid session.. request_params = {'method': 'users.get', 'oauth': '1', 'v': '5.73'}
+2021-02-21 17:31:12,448 - VkSessionDataConfigurator - INFO - APP successfully started!
+2021-02-21 17:32:05,343 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): api.vk.com:443
+2021-02-21 17:32:06,585 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): api.vk.com:443
+2021-02-21 17:32:06,937 - urllib3.connectionpool - DEBUG - https://api.vk.com:443 "POST /method/photos.getAlbums HTTP/1.1" 200 158
+2021-02-21 17:32:06,939 - VkSessionDataConfigurator - ERROR - 5. User authorization failed: invalid session.. request_params = {'method': 'photos.getAlbums', 'oauth': '1', 'v': '5.3'}
+Traceback (most recent call last):
+  File "/home/sakolnik/Documents/SpammerVK/SpammerVk1_4/model/VkSessionData/VkSessionDataConfigurator.py", line 101, in set_album_id
+    album_aid = self.search_album_of_user_by_title("uploadsPhotos",vk_api)
+  File "/home/sakolnik/Documents/SpammerVK/SpammerVk1_4/model/VkSessionData/VkSessionDataConfigurator.py", line 93, in search_album_of_user_by_title
+    req = vk_api.photos.getAlbums()["items"]
+  File "/home/sakolnik/.local/lib/python3.8/site-packages/vk/api.py", line 173, in __call__
+    return self._api._session.make_request(self)
+  File "/home/sakolnik/.local/lib/python3.8/site-packages/vk/api.py", line 102, in make_request
+    raise error
+vk.exceptions.VkAPIError: 5. User authorization failed: invalid session.. request_params = {'method': 'photos.getAlbums', 'oauth': '1', 'v': '5.3'}
+2021-02-21 17:32:07,040 - urllib3.connectionpool - DEBUG - https://api.vk.com:443 "POST /method/users.get HTTP/1.1" 200 152
+2021-02-21 17:32:07,041 - VkSessionDataConfigurator - ERROR - 5. User authorization failed: invalid session.. request_params = {'method': 'users.get', 'oauth': '1', 'v': '5.73'}
+Traceback (most recent call last):
+  File "/home/sakolnik/Documents/SpammerVK/SpammerVk1_4/model/VkSessionData/VkSessionDataConfigurator.py", line 31, in update_session_data_container_with_new_token
+    self.set_user_id(new_token)
+  File "/home/sakolnik/Documents/SpammerVK/SpammerVk1_4/model/VkSessionData/VkSessionDataConfigurator.py", line 88, in set_user_id
+    req = self.__session_data_container.vk_api.users.get(access_token=token,v="5.73")
+  File "/home/sakolnik/.local/lib/python3.8/site-packages/vk/api.py", line 173, in __call__
+    return self._api._session.make_request(self)
+  File "/home/sakolnik/.local/lib/python3.8/site-packages/vk/api.py", line 102, in make_request
+    raise error
+vk.exceptions.VkAPIError: 5. User authorization failed: invalid session.. request_params = {'method': 'users.get', 'oauth': '1', 'v': '5.73'}
+2021-02-21 17:32:07,290 - VkSessionDataConfigurator - INFO - APP successfully started!
+2021-02-21 17:33:10,271 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): api.vk.com:443
+2021-02-21 17:33:10,629 - urllib3.connectionpool - DEBUG - https://api.vk.com:443 "POST /method/photos.getAlbums HTTP/1.1" 200 158
+2021-02-21 17:33:10,631 - VkSessionDataConfigurator - ERROR - 5. User authorization failed: invalid session.. request_params = {'method': 'photos.getAlbums', 'oauth': '1', 'v': '5.3'}
+Traceback (most recent call last):
+  File "/home/sakolnik/Documents/SpammerVK/SpammerVk1_4/model/VkSessionData/VkSessionDataConfigurator.py", line 101, in set_album_id
+    album_aid = self.search_album_of_user_by_title("uploadsPhotos",vk_api)
+  File "/home/sakolnik/Documents/SpammerVK/SpammerVk1_4/model/VkSessionData/VkSessionDataConfigurator.py", line 93, in search_album_of_user_by_title
+    req = vk_api.photos.getAlbums()["items"]
+  File "/home/sakolnik/.local/lib/python3.8/site-packages/vk/api.py", line 173, in __call__
+    return self._api._session.make_request(self)
+  File "/home/sakolnik/.local/lib/python3.8/site-packages/vk/api.py", line 102, in make_request
+    raise error
+vk.exceptions.VkAPIError: 5. User authorization failed: invalid session.. request_params = {'method': 'photos.getAlbums', 'oauth': '1', 'v': '5.3'}
+2021-02-21 17:33:10,731 - urllib3.connectionpool - DEBUG - https://api.vk.com:443 "POST /method/users.get HTTP/1.1" 200 152
+2021-02-21 17:33:10,733 - VkSessionDataConfigurator - ERROR - 5. User authorization failed: invalid session.. request_params = {'method': 'users.get', 'oauth': '1', 'v': '5.73'}
+Traceback (most recent call last):
+  File "/home/sakolnik/Documents/SpammerVK/SpammerVk1_4/model/VkSessionData/VkSessionDataConfigurator.py", line 31, in update_session_data_container_with_new_token
+    self.set_user_id(new_token)
+  File "/home/sakolnik/Documents/SpammerVK/SpammerVk1_4/model/VkSessionData/VkSessionDataConfigurator.py", line 88, in set_user_id
+    req = self.__session_data_container.vk_api.users.get(access_token=token,v="5.73")
+  File "/home/sakolnik/.local/lib/python3.8/site-packages/vk/api.py", line 173, in __call__
+    return self._api._session.make_request(self)
+  File "/home/sakolnik/.local/lib/python3.8/site-packages/vk/api.py", line 102, in make_request
+    raise error
+vk.exceptions.VkAPIError: 5. User authorization failed: invalid session.. request_params = {'method': 'users.get', 'oauth': '1', 'v': '5.73'}
+2021-02-21 17:33:10,955 - VkSessionDataConfigurator - INFO - APP successfully started!
+2021-02-21 17:40:48,617 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): api.vk.com:443
+2021-02-21 17:40:49,003 - urllib3.connectionpool - DEBUG - https://api.vk.com:443 "POST /method/photos.getAlbums HTTP/1.1" 200 158
+2021-02-21 17:40:49,005 - VkSessionDataConfigurator - ERROR - 5. User authorization failed: invalid session.. request_params = {'method': 'photos.getAlbums', 'oauth': '1', 'v': '5.3'}
+Traceback (most recent call last):
+  File "/home/sakolnik/Documents/SpammerVK/SpammerVk1_4/model/VkSessionData/VkSessionDataConfigurator.py", line 101, in set_album_id
+    album_aid = self.search_album_of_user_by_title("uploadsPhotos",vk_api)
+  File "/home/sakolnik/Documents/SpammerVK/SpammerVk1_4/model/VkSessionData/VkSessionDataConfigurator.py", line 93, in search_album_of_user_by_title
+    req = vk_api.photos.getAlbums()["items"]
+  File "/home/sakolnik/.local/lib/python3.8/site-packages/vk/api.py", line 173, in __call__
+    return self._api._session.make_request(self)
+  File "/home/sakolnik/.local/lib/python3.8/site-packages/vk/api.py", line 102, in make_request
+    raise error
+vk.exceptions.VkAPIError: 5. User authorization failed: invalid session.. request_params = {'method': 'photos.getAlbums', 'oauth': '1', 'v': '5.3'}
+2021-02-21 17:40:49,105 - urllib3.connectionpool - DEBUG - https://api.vk.com:443 "POST /method/users.get HTTP/1.1" 200 152
+2021-02-21 17:40:49,108 - VkSessionDataConfigurator - ERROR - 5. User authorization failed: invalid session.. request_params = {'method': 'users.get', 'oauth': '1', 'v': '5.73'}
+Traceback (most recent call last):
+  File "/home/sakolnik/Documents/SpammerVK/SpammerVk1_4/model/VkSessionData/VkSessionDataConfigurator.py", line 31, in update_session_data_container_with_new_token
+    self.set_user_id(new_token)
+  File "/home/sakolnik/Documents/SpammerVK/SpammerVk1_4/model/VkSessionData/VkSessionDataConfigurator.py", line 88, in set_user_id
+    req = self.__session_data_container.vk_api.users.get(access_token=token,v="5.73")
+  File "/home/sakolnik/.local/lib/python3.8/site-packages/vk/api.py", line 173, in __call__
+    return self._api._session.make_request(self)
+  File "/home/sakolnik/.local/lib/python3.8/site-packages/vk/api.py", line 102, in make_request
+    raise error
+vk.exceptions.VkAPIError: 5. User authorization failed: invalid session.. request_params = {'method': 'users.get', 'oauth': '1', 'v': '5.73'}
+2021-02-21 17:40:49,309 - VkSessionDataConfigurator - INFO - APP successfully started!
+2021-02-21 17:53:19,932 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): api.vk.com:443
+2021-02-21 17:53:21,109 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): api.vk.com:443
+2021-02-21 17:53:21,421 - urllib3.connectionpool - DEBUG - https://api.vk.com:443 "POST /method/photos.getAlbums HTTP/1.1" 200 158
+2021-02-21 17:53:21,423 - VkSessionDataConfigurator - ERROR - 5. User authorization failed: invalid session.. request_params = {'method': 'photos.getAlbums', 'oauth': '1', 'v': '5.3'}
+Traceback (most recent call last):
+  File "/home/sakolnik/Documents/SpammerVK/SpammerVk1_4/model/VkSessionData/VkSessionDataConfigurator.py", line 101, in set_album_id
+    album_aid = self.search_album_of_user_by_title("uploadsPhotos",vk_api)
+  File "/home/sakolnik/Documents/SpammerVK/SpammerVk1_4/model/VkSessionData/VkSessionDataConfigurator.py", line 93, in search_album_of_user_by_title
+    req = vk_api.photos.getAlbums()["items"]
+  File "/home/sakolnik/.local/lib/python3.8/site-packages/vk/api.py", line 173, in __call__
+    return self._api._session.make_request(self)
+  File "/home/sakolnik/.local/lib/python3.8/site-packages/vk/api.py", line 102, in make_request
+    raise error
+vk.exceptions.VkAPIError: 5. User authorization failed: invalid session.. request_params = {'method': 'photos.getAlbums', 'oauth': '1', 'v': '5.3'}
+2021-02-21 17:53:21,522 - urllib3.connectionpool - DEBUG - https://api.vk.com:443 "POST /method/users.get HTTP/1.1" 200 152
+2021-02-21 17:53:21,523 - VkSessionDataConfigurator - ERROR - 5. User authorization failed: invalid session.. request_params = {'method': 'users.get', 'oauth': '1', 'v': '5.73'}
+Traceback (most recent call last):
+  File "/home/sakolnik/Documents/SpammerVK/SpammerVk1_4/model/VkSessionData/VkSessionDataConfigurator.py", line 31, in update_session_data_container_with_new_token
+    self.set_user_id(new_token)
+  File "/home/sakolnik/Documents/SpammerVK/SpammerVk1_4/model/VkSessionData/VkSessionDataConfigurator.py", line 88, in set_user_id
+    req = self.__session_data_container.vk_api.users.get(access_token=token,v="5.73")
+  File "/home/sakolnik/.local/lib/python3.8/site-packages/vk/api.py", line 173, in __call__
+    return self._api._session.make_request(self)
+  File "/home/sakolnik/.local/lib/python3.8/site-packages/vk/api.py", line 102, in make_request
+    raise error
+vk.exceptions.VkAPIError: 5. User authorization failed: invalid session.. request_params = {'method': 'users.get', 'oauth': '1', 'v': '5.73'}
+2021-02-21 17:53:21,689 - VkSessionDataConfigurator - INFO - APP successfully started!
+2021-02-21 17:53:25,412 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): api.vk.com:443
+2021-02-21 17:53:25,603 - urllib3.connectionpool - DEBUG - https://api.vk.com:443 "POST /method/photos.getAlbums HTTP/1.1" 200 257
+2021-02-21 17:53:25,605 - VkSessionDataConfigurator - ERROR - 8. Invalid request: versions below 5.21 are deprecated. Version param should be passed as "v". "version" param is invalid and not supported. For more information go to https://vk.com/dev/constant_version_updates. request_params = {'method': 'photos.getAlbums', 'oauth': '1', 'v': '5.3'}
+Traceback (most recent call last):
+  File "/home/sakolnik/Documents/SpammerVK/SpammerVk1_4/model/VkSessionData/VkSessionDataConfigurator.py", line 101, in set_album_id
+    album_aid = self.search_album_of_user_by_title("uploadsPhotos",vk_api)
+  File "/home/sakolnik/Documents/SpammerVK/SpammerVk1_4/model/VkSessionData/VkSessionDataConfigurator.py", line 93, in search_album_of_user_by_title
+    req = vk_api.photos.getAlbums()["items"]
+  File "/home/sakolnik/.local/lib/python3.8/site-packages/vk/api.py", line 173, in __call__
+    return self._api._session.make_request(self)
+  File "/home/sakolnik/.local/lib/python3.8/site-packages/vk/api.py", line 102, in make_request
+    raise error
+vk.exceptions.VkAPIError: 8. Invalid request: versions below 5.21 are deprecated. Version param should be passed as "v". "version" param is invalid and not supported. For more information go to https://vk.com/dev/constant_version_updates. request_params = {'method': 'photos.getAlbums', 'oauth': '1', 'v': '5.3'}
+2021-02-21 17:53:25,675 - urllib3.connectionpool - DEBUG - https://api.vk.com:443 "POST /method/users.get HTTP/1.1" 200 103
+2021-02-21 17:53:25,734 - urllib3.connectionpool - DEBUG - https://api.vk.com:443 "POST /method/account.getProfileInfo HTTP/1.1" 200 262
+2021-02-21 17:53:25,735 - VkSessionDataConfigurator - ERROR - 8. Invalid request: versions below 5.21 are deprecated. Version param should be passed as "v". "version" param is invalid and not supported. For more information go to https://vk.com/dev/constant_version_updates. request_params = {'method': 'account.getProfileInfo', 'oauth': '1', 'v': '5.3'}
+Traceback (most recent call last):
+  File "/home/sakolnik/Documents/SpammerVK/SpammerVk1_4/model/VkSessionData/VkSessionDataConfigurator.py", line 32, in update_session_data_container_with_new_token
+    self.update_account_data(vk_api)
+  File "/home/sakolnik/Documents/SpammerVK/SpammerVk1_4/model/VkSessionData/VkSessionDataConfigurator.py", line 60, in update_account_data
+    data = new_vk_api.users.get(user_ids=new_vk_api.account.getProfileInfo()["screen_name"], fields='photo_200')[0]
+  File "/home/sakolnik/.local/lib/python3.8/site-packages/vk/api.py", line 173, in __call__
+    return self._api._session.make_request(self)
+  File "/home/sakolnik/.local/lib/python3.8/site-packages/vk/api.py", line 102, in make_request
+    raise error
+vk.exceptions.VkAPIError: 8. Invalid request: versions below 5.21 are deprecated. Version param should be passed as "v". "version" param is invalid and not supported. For more information go to https://vk.com/dev/constant_version_updates. request_params = {'method': 'account.getProfileInfo', 'oauth': '1', 'v': '5.3'}

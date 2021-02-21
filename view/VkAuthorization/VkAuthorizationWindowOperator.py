@@ -1,6 +1,8 @@
-from PyQt5.QtWebKitWidgets import QWebPage
+from PyQt5.QtWebEngineWidgets import QWebEngineView as QWebView,QWebEnginePage as QWebPage
+
 from PyQt5.QtCore import QUrl,QObject,pyqtSignal
 import json,sys
+import re
 class VkAuthorizationWindowOperator(QObject):
 
     vk_auth_window_closed  = pyqtSignal()
@@ -25,16 +27,19 @@ class VkAuthorizationWindowOperator(QObject):
         req = 'https://oauth.vk.com/authorize?client_id={app_id}&display=mobile&redirect_uri=http://vk.com&scope=groups,messages,wall,offline,photos,friends&response_type=code&v=5.60'.format(app_id = str(self.__app_id))
         self.__view.load(QUrl(req))
 
+    def processPageHTML(self, html):
+        if 'access_token' in html:
+            access_token = re.search(r'"access_token":"(?P<token>\w+)?"', html).group('token')
+            print("has token emited " + access_token)
+            self.token_recieved.emit(str(access_token))
+
     def get_token(self):
+        self.__view.page().toHtml(self.processPageHTML)
+
         if '#code=' in self.__view.url().toString():
             code = self.__view.url().toString()[self.__view.url().toString().index("code=") + 5:]
             req = 'https://oauth.vk.com/access_token?client_id={app_id}&client_secret=GqQfpAYszfmlLsG1Vvjb&redirect_uri=http://vk.com&code='.format(app_id = str(self.__app_id)) + str(code)
             self.__view.setUrl(QUrl(req))
-        if  self.__view.page().mainFrame().toPlainText() and  'access_token' in self.__view.page().mainFrame().toPlainText():
-            access_token = (json.loads(self.__view.page().mainFrame().toPlainText().replace("'", "\""))["access_token"])
-            print("has token emited")
-            self.token_recieved.emit(str(access_token))
-
 
 
     def show(self):
