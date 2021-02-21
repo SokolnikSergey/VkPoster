@@ -36,7 +36,9 @@ from model.SettingsManager.SettingsManager import SettingsManager
 from model.Settings.SettingsModel import SettingsModel
 from model.Logger.Logger import MyLogger
 from model.ProgressBinder.ProgressBinder import ProgressBinder
-import sys,shelve,os
+import sys,shelve,os, subprocess
+
+
 from PyQt5.QtWidgets import QApplication
 
 class MainStarter(QObject):
@@ -79,7 +81,11 @@ class MainStarter(QObject):
         self.__post_to_group_model.btn_helper_clecked.connect(self.start_helper)
 
     def start_helper(self):
-        os.startfile("..\AuxElements\Helper.chm")
+        if sys.platform == "win32":
+            os.startfile("../AuxElements/Helper.chm")
+        else:
+            opener = "open" if sys.platform == "darwin" else "xdg-open"
+            subprocess.call([opener, "../AuxElements/Helper.chm"])
 
     def check_existing_of_token(self):
         token = self.__vk_session_data.token

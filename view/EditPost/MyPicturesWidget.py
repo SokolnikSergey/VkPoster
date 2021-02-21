@@ -1,6 +1,7 @@
 from PyQt5.QtWidgets import QWidget
 from PyQt5.QtGui import QPainter
 from PyQt5.QtCore import QRect
+import time
 
 class MyPicturesWidget(QWidget):
     """This is custom class , which allow draw pictures at any position
@@ -76,12 +77,12 @@ class MyPicturesWidget(QWidget):
 
     def wheelEvent(self, eventWheel):
         if len(self.list_pictures) > 1:
-            if eventWheel.angleDelta().y() > 0:
+            if eventWheel.angleDelta().y():
                 self.scroll_picture(up=True, down=False)
             else:
                 self.scroll_picture(down=True, up=False)
-
         self.repaint()
+        time.sleep(0.5)
 
     def draw_pictures(self):
         x, y, counter = 0, 0, 0

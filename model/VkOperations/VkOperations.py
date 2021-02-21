@@ -1,4 +1,5 @@
-vk_api_version = "5,73"
+vk_api_version = "5.73"
+
 import json
 
 
@@ -64,7 +65,7 @@ class VkOperations:
 
         try:
 
-            vk_api.wall.post(owner_id = str(gid * -1),message = text,attachments = photos_id[:-1])
+            vk_api.wall.post(v='5.73', owner_id = str(gid * -1),message = text,attachments = photos_id[:-1])
             VkOperations.logger.change_name(VkOperations.__name__)
             VkOperations.logger.info("Post has sent to group (id)->" + str(gid))
         except Exception as ex:

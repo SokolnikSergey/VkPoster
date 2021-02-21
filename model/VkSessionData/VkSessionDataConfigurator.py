@@ -57,7 +57,7 @@ class VkSessionDataConfigurator:
         return vk_api
 
     def update_account_data(self,new_vk_api):
-        data = new_vk_api.users.get(user_ids=new_vk_api.account.getProfileInfo()["screen_name"], fields='photo_200')[0]
+        data = new_vk_api.users.get(v="5.73", user_ids=new_vk_api.account.getProfileInfo(v="5.73")["screen_name"], fields='photo_200')[0]
         ava = self.download_photo(data["photo_200"])
         first_name = data["first_name"]
         last_name = data["last_name"]
@@ -90,7 +90,7 @@ class VkSessionDataConfigurator:
         self.__session_data_container.user_id = uid
 
     def search_album_of_user_by_title(self,title,vk_api):
-        req = vk_api.photos.getAlbums()["items"]
+        req = vk_api.photos.getAlbums(v="5.73")["items"]
         for group in req:
             if group["title"] == title:
                 return group["id"]
