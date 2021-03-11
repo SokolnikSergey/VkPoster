@@ -17,7 +17,7 @@ class DataUploadingVkOperations:
         server, list_photos, aid, hashe = json_req['server'], json_req['photos_list'],\
                                           json_req['aid'], json_req['hash']
         save = vk_api.photos.save(server=server, album_id=aid, hash=hashe, photos_list=list_photos, v='5.83')
-        photo_id = "photo235374879" + "_" + str(save[0]["id"])
+        photo_id = "photo643518532" + "_" + str(save[0]["id"]) # TODO remove hardcoded album id !!!
         return photo_id
     @staticmethod
     def getUploadURL(vk_api):
