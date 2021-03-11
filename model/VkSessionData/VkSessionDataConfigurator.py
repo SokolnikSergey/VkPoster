@@ -53,11 +53,11 @@ class VkSessionDataConfigurator:
 
     def create_vk_api(self, token):
         session = vk.Session(token)
-        vk_api = vk.API(session=session,v="5.3")
+        vk_api = vk.API(session=session,v="5.73")
         return vk_api
 
     def update_account_data(self,new_vk_api):
-        data = new_vk_api.users.get(v="5.73", user_ids=new_vk_api.account.getProfileInfo(v="5.73")["screen_name"], fields='photo_200')[0]
+        data = new_vk_api.users.get(v="5.73", user_ids=new_vk_api.account.getProfileInfo(v="5.73")['id'], fields='photo_200')[0]
         ava = self.download_photo(data["photo_200"])
         first_name = data["first_name"]
         last_name = data["last_name"]
@@ -102,7 +102,7 @@ class VkSessionDataConfigurator:
             if album_aid:
                 self.__session_data_container.album_id = album_aid
             else :
-                vk_api.photos.createAlbum(title = "uploadsPhotos",type = 'nobody')
+                vk_api.photos.createAlbum(title = "uploadsPhotos",type = 'nobody', v='5.73')
                 album_aid = self.search_album_of_user_by_title("uploadsPhotos",vk_api)
                 if album_aid :
                     self.__session_data_container.album_id = album_aid
