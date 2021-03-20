@@ -44,7 +44,7 @@ class PhotoManager(Subscriber):
                 return path
 
             path = DataUploadingVkOperations.upload_photo_to_vk(vk_api,
-                   DataUploadingVkOperations.getUploadURL(vk_api),
+                   DataUploadingVkOperations.getUploadURL(vk_api, self.__album_id),
                    PhotoConvertionOperations.convert_image_to_byte_array(photo,self.__temp_photo_buffer))
 
             if(path is not None):
@@ -64,7 +64,6 @@ class PhotoManager(Subscriber):
     def album_id_changed(self,new_aid):
         self.__album_id = new_aid
         if self.__album_id:
-            DataUploadingVkOperations.ALBUM_ID = new_aid
             self.fill_compliance_container(new_aid)
 
     def subscribe(self,publisher):

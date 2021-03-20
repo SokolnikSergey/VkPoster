@@ -182,7 +182,7 @@ class MainStarter(QObject):
     def create_action_executors(self,session_data):
         self.__vk_operator = VkOperator(self.__logger,self.__vk_session_data,self.__group_container,
         session_data.vk_api,PhotoManager(self.__logger,self.__config_container.photo_complience_path,
-                            self.__vk_session_data,PhotoCompliancesContainer([],[])))
+                            self.__vk_session_data,PhotoCompliancesContainer([],[]),session_data.album_id ))
 
         self.__action_executor = ActionExecutor(self.__vk_operator,StorageOperator(self.__logger,
                     self.__post_container,shelve.open(self.__config_container.post_container_path)))

@@ -82,7 +82,6 @@ class VkSessionData(Publisher):
             subscriber.vk_api_changed(new_vk_api)
 
     def album_id_changed(self,new_albim_id):
-        DataUploadingVkOperations.ALBUM_ID = new_albim_id
         for subscriber in self.__list_of_albim_id_subscribers:
             subscriber.album_id_changed(new_albim_id)
 
