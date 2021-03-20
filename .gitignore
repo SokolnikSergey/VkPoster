@@ -2,6 +2,6 @@ model/AuxElements/*
 !/AuxElements/Helper.chm
 model/DB/*
 .idea/*
-*.pyc
+**.pyc
 
 
