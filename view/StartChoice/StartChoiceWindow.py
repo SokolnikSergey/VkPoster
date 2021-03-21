@@ -14,20 +14,12 @@ class StartChoiceWindow(QWidget):
 
 
     def setting_beginner_window(self):
-        self.setGeometry(100, 50, 500, 500)
+        self.setGeometry(100, 50, 500, 275)
         self.setWindowTitle("Choose Type")
 
     def create_buttons_and_labels(self) :
         self.btn_spammer_vk = MyProgressButton("PostToGroup",self) #text,parent,done,remainded,failed
         self.btn_spammer_vk.setSizePolicy(QSizePolicy.Expanding,QSizePolicy.Expanding)
-
-        self.btn_cleanner_vk = QPushButton("CleannerVK", self)
-        self.btn_cleanner_vk.setSizePolicy(QSizePolicy.Expanding,QSizePolicy.Expanding)
-        self.btn_cleanner_vk.setDisabled(True)
-
-        self.btn_shokeman_vk = QPushButton("ShokemanVK", self)
-        self.btn_shokeman_vk.setSizePolicy(QSizePolicy.Expanding,QSizePolicy.Expanding)
-        self.btn_shokeman_vk.setDisabled(True)
 
         self.settings_btn = QPushButton("Settings", self)
         self.settings_btn.setSizePolicy(QSizePolicy.MinimumExpanding,QSizePolicy.MinimumExpanding)
@@ -46,8 +38,7 @@ class StartChoiceWindow(QWidget):
 
         self.qv_box.addWidget(self.profile_info_widget,0)
         self.qv_box.addWidget(self.btn_spammer_vk)
-        self.qv_box.addWidget(self.btn_cleanner_vk)
-        self.qv_box.addWidget(self.btn_shokeman_vk)
+
         self.qv_box.addLayout(self.qh_settings_change_acc)
         self.setLayout(self.qv_box)
 
