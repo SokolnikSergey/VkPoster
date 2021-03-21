@@ -1,5 +1,5 @@
 from PyQt5.QtWidgets import QWidget,QPushButton,QVBoxLayout,QHBoxLayout,QSizePolicy
-from PyQt5.Qt import Qt
+from PyQt5  import QtCore
 from view.MyProgressButton.MyProgressButton import MyProgressButton
 from view.StartChoice.ProfileInfoWidget import ProfileInfoWidget
 
@@ -7,6 +7,8 @@ from view.StartChoice.ProfileInfoWidget import ProfileInfoWidget
 class StartChoiceWindow(QWidget):
     def __init__(self):
         super(StartChoiceWindow, self).__init__()
+        self.setWindowFlags(QtCore.Qt.WindowStaysOnTopHint)
+
         self.setting_beginner_window()
         self.create_profile_info_widget()
         self.create_buttons_and_labels()
@@ -52,7 +54,6 @@ class StartChoiceWindow(QWidget):
         self.setLayout(self.qv_box)
 
     def create_profile_info_widget(self):
-
         self.profile_info_widget = ProfileInfoWidget(self)
 
     def start_show(self):
