@@ -2,7 +2,6 @@ from PyQt5.QtWidgets import QWidget,QPushButton,QLabel,QVBoxLayout,QHBoxLayout,Q
 from PyQt5.QtWidgets import QLineEdit
 from PyQt5.QtGui import QFont
 
-
 class PostToGroupWindow(QWidget):
 
     def __init__(self):
