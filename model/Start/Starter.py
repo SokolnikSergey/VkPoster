@@ -43,10 +43,14 @@ from PyQt5.QtWidgets import QApplication
 
 class MainStarter(QObject):
 
-    def __init__(self,logger):
+    def __init__(self,logger, app):
         super(MainStarter, self).__init__()
         self.create_splash_screen()
         self.__splash_screen.show()
+
+        for i in range(10_000):  # Need to show splash -> dirty hack from stack overflow ) but it works as expected !
+            app.processEvents()
+
         self.__logger = logger
         self.create_auxiliary_elements()
         self.__start_choice_model.show()
@@ -231,7 +235,7 @@ app = QApplication(sys.argv)
 MyLogger.PATH_TO_FILE = '../AuxElements/logger'
 logger = MyLogger()
 try:
-    starter = MainStarter(logger)
+    starter = MainStarter(logger, app)
 except Exception as ex:
     logger.exception(ex)
 sys.exit(app.exec_())
