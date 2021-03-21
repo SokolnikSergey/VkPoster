@@ -1,6 +1,5 @@
 from PyQt5.QtCore import pyqtSignal, QObject
-from PyQt5.QtGui import QPainter,QColor,QPen,QLinearGradient
-from PyQt5.Qt import Qt
+from PyQt5.QtGui import QPainter
 
 
 class StartChoiceViewOperator(QObject):
@@ -22,6 +21,8 @@ class StartChoiceViewOperator(QObject):
 
     def show(self):
         self.__view.show()
+        self.__view.raise_()
+        self.__view.activateWindow()
 
     def hide(self):
         self.__view.hide()

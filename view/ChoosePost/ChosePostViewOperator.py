@@ -65,6 +65,8 @@ class ChosePostViewOperator(QObject):
 
     def show(self):
         self.__window.show()
+        self.__window.raise_()
+        self.__window.activateWindow()
 
     def hide(self):
         self.__window.hide()
