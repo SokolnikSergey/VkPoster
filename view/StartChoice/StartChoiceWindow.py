@@ -46,9 +46,3 @@ class StartChoiceWindow(QWidget):
 
     def create_profile_info_widget(self):
         self.profile_info_widget = ProfileInfoWidget(self)
-
-    def start_show(self):
-        self.show()
-
-    def hide_window(self):
-        self.hide()
