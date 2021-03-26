@@ -17,7 +17,7 @@ class StartChoiceWindow(QWidget):
     def setting_beginner_window(self):
         self.setGeometry(100, 50, 500, 275)
         self.setWindowTitle("Choose Type")
-        self.setWindowIcon(QIcon('../../model/AuxElements/icon.png z'))
+        self.setWindowIcon(QIcon('../../model/AuxElements/icon.png'))
 
     def create_buttons_and_labels(self) :
         self.btn_spammer_vk = MyProgressButton("Posts To Group",self) #text,parent,done,remainded,failed
