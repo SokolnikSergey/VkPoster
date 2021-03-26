@@ -20,13 +20,13 @@ class StartChoiceWindow(QWidget):
         self.setWindowIcon(QIcon('../../model/AuxElements/icon.png z'))
 
     def create_buttons_and_labels(self) :
-        self.btn_spammer_vk = MyProgressButton("PostToGroup",self) #text,parent,done,remainded,failed
+        self.btn_spammer_vk = MyProgressButton("Posts To Group",self) #text,parent,done,remainded,failed
         self.btn_spammer_vk.setSizePolicy(QSizePolicy.Expanding,QSizePolicy.Expanding)
 
         self.settings_btn = QPushButton("Settings", self)
         self.settings_btn.setSizePolicy(QSizePolicy.MinimumExpanding,QSizePolicy.MinimumExpanding)
 
-        self.btn_change_account = QPushButton("ChangeAccount", self)
+        self.btn_change_account = QPushButton("Change Account", self)
         self.btn_change_account.setSizePolicy(QSizePolicy.MinimumExpanding,QSizePolicy.MinimumExpanding)
 
 
