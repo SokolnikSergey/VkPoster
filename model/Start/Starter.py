@@ -59,8 +59,8 @@ class MainStarter(QObject):
 
     def accept_exit(self):
         if self.__accept_leave_app.exec() == AcceptLeaveApp.Ok:
-            return True
-        return False
+            return False
+        return True
 
     def create_messages_and_warnings(self):
         self.__accept_leave_app = AcceptLeaveApp()

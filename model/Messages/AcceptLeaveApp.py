@@ -4,10 +4,11 @@ from PyQt5.QtWidgets import QMessageBox
 class AcceptLeaveApp(QMessageBox):
     def __init__(self):
         super(AcceptLeaveApp, self).__init__()
-        self.set_texts("Do you want leave application?",
-                       "Application doesn't work without authorization")
+        self.setWindowTitle('Need authorization')
+        self.set_texts("Application doesn't work without signed in account",
+                       "Start authorization?")
 
-        self.set_buttons(QMessageBox.Cancel,QMessageBox.Ok,QMessageBox.Cancel)
+        self.set_buttons(QMessageBox.Ok,QMessageBox.Ok,QMessageBox.Cancel)
 
     def set_texts(self,main_text,auxiliary_info):
         self.setText(main_text)
