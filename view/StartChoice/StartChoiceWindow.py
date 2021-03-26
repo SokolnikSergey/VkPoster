@@ -1,6 +1,7 @@
 from PyQt5.QtWidgets import QWidget,QPushButton,QVBoxLayout,QHBoxLayout,QSizePolicy
 from view.MyProgressButton.MyProgressButton import MyProgressButton
 from view.StartChoice.ProfileInfoWidget import ProfileInfoWidget
+from PyQt5.QtGui import QIcon
 
 
 class StartChoiceWindow(QWidget):
@@ -16,6 +17,7 @@ class StartChoiceWindow(QWidget):
     def setting_beginner_window(self):
         self.setGeometry(100, 50, 500, 275)
         self.setWindowTitle("Choose Type")
+        self.setWindowIcon(QIcon('../../model/AuxElements/icon.png z'))
 
     def create_buttons_and_labels(self) :
         self.btn_spammer_vk = MyProgressButton("PostToGroup",self) #text,parent,done,remainded,failed
