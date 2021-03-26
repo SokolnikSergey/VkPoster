@@ -4,6 +4,8 @@ from PyQt5.Qt import Qt
 from PyQt5.QtGui import QPixmap
 
 class VkSessionDataConfigurator:
+    PHOTO_ALBUM_NAME = 'Uploaded photos T(TH application)'
+    
     def __init__(self,logger,session_data_container,path_to_token_file):
 
         self.__logger = logger
@@ -98,12 +100,12 @@ class VkSessionDataConfigurator:
 
     def set_album_id(self,vk_api):
         try:
-            album_aid = self.search_album_of_user_by_title("uploadsPhotos",vk_api)
+            album_aid = self.search_album_of_user_by_title(VkSessionDataConfigurator.PHOTO_ALBUM_NAME,vk_api)
             if album_aid:
                 self.__session_data_container.album_id = album_aid
             else :
-                vk_api.photos.createAlbum(title = "uploadsPhotos",type = 'nobody', v='5.73')
-                album_aid = self.search_album_of_user_by_title("uploadsPhotos",vk_api)
+                vk_api.photos.createAlbum(title = VkSessionDataConfigurator.PHOTO_ALBUM_NAME, privacy_view = 'owner', v='5.73')
+                album_aid = self.search_album_of_user_by_title(VkSessionDataConfigurator.PHOTO_ALBUM_NAME,vk_api)
                 if album_aid :
                     self.__session_data_container.album_id = album_aid
             self.__logger.change_name(self.__class__.__name__)
