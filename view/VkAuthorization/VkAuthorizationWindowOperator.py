@@ -1,7 +1,6 @@
 from PyQt5.QtWebEngineWidgets import QWebEngineView as QWebView,QWebEnginePage as QWebPage
 
 from PyQt5.QtCore import QUrl,QObject,pyqtSignal
-import json,sys
 import re
 class VkAuthorizationWindowOperator(QObject):
 
@@ -36,7 +35,10 @@ class VkAuthorizationWindowOperator(QObject):
     def get_token(self):
         self.__view.page().toHtml(self.processPageHTML)
 
-        if '#code=' in self.__view.url().toString():
+        current_url = self.__view.url().toString()
+        if 'user_denied' in current_url: # the user has clicked 'cancel' during vk-authorization
+            self.vk_auth_window_closed.emit()
+        elif '#code=' in current_url:
             code = self.__view.url().toString()[self.__view.url().toString().index("code=") + 5:]
             req = 'https://oauth.vk.com/access_token?client_id={app_id}&client_secret=GqQfpAYszfmlLsG1Vvjb&redirect_uri=http://vk.com&code='.format(app_id = str(self.__app_id)) + str(code)
             self.__view.setUrl(QUrl(req))
