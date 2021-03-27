@@ -21,15 +21,13 @@ class ChosePostWindow(QWidget,QObject):
     def create_buttons(self):
         self.btn_delete_post = QPushButton("Delete Post")
         self.btn_delete_post.setMinimumHeight(30)
-        self.btn_delete_post.setStyleSheet("background-color: rgb(0,100,0)")
 
         self.btn_add_new_post = QPushButton("Add New Post")
         self.btn_add_new_post.setMinimumHeight(30)
-        self.btn_add_new_post.setStyleSheet("background-color: rgb(0,100,0)")
 
         self.btn_backed = QPushButton("Back")
         self.btn_backed.setMinimumHeight(30)
-        self.btn_backed.setStyleSheet("background-color: rgb(200,0,0)")
+        self.btn_backed.setStyleSheet("background-color: rgb(255,167,167)")
 
     def create_list_widget_and_setting(self):
         self.list_post_widget = QListWidget(self)

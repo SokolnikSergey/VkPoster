@@ -25,16 +25,16 @@ class SettingsWindow(QWidget):
         self.setGeometry(100,100,500,500)
 
     def setup_style(self):
-        self.setStyleSheet("QPushButton {font: bold 14px; background-color: rgb(0,200,0)}"
+        self.setStyleSheet("QPushButton {font: bold 14px; background-color: rgb(6, 50, 200)}"
                            "QLabel { font: bold 15px ; color: rgb(0,50,200) } "
                            "QLCDNumber {border : 0px;} "
-                           "QCheckBox {font: bold 15px ; color: rgb(200,150,50)}")
+                           "QCheckBox {font: bold 15px ; color: rgb(6, 50, 200)}")
 
     def create_lables(self):
         self.lbl_change_country = QLabel("Country to send -> ")
-        self.lbl_amount_of_groups = QLabel("Max amount of groups to search: ")
+        self.lbl_amount_of_groups = QLabel("Max amount of groups to one search: ")
         self.lbl_amount_of_users = QLabel("Min amount of users in groups: ")
-        self.lbl_timeout = QLabel("Timeout between operations: ")
+        self.lbl_timeout = QLabel("Timeout between operations(sec): ")
 
     def create_comboboxes(self):
         self.country_id_combobx = QComboBox(self)
@@ -48,17 +48,17 @@ class SettingsWindow(QWidget):
 
         self.timeout_scroll.setPageStep(1)
         self.timeout_scroll.setTickPosition(2)
-        self.timeout_scroll.setRange(1,10)
+        self.timeout_scroll.setRange(5,30)
 
         self.max_amount_groups_scroll = QSlider(Qt.Horizontal,self)
         self.max_amount_groups_scroll.setPageStep(5)
         self.max_amount_groups_scroll.setTickPosition(2)
-        self.max_amount_groups_scroll.setRange(5, 100)
+        self.max_amount_groups_scroll.setRange(5, 150)
 
         self.min_amount_users_scroll = QSlider(Qt.Horizontal, self)
-        self.min_amount_users_scroll.setPageStep(1000)
+        self.min_amount_users_scroll.setPageStep(500)
         self.min_amount_users_scroll.setTickPosition(2)
-        self.min_amount_users_scroll.setRange(10, 10000)
+        self.min_amount_users_scroll.setRange(0, 20000)
 
     def create_buttons(self):
         self.save_btn = QPushButton("Save Changes",self)
