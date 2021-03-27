@@ -20,11 +20,15 @@ class SettingsWindowOperator(QObject):
 
     def set_begins_values(self,values):
 
-        self.__window.country_id_combobx.setCurrentIndex((values[0]))
+        self.__window.country_id_combobx.setCurrentIndex(values[0])
         self.__window.max_amount_groups_scroll.setValue(values[1])
         self.__window.min_amount_users_scroll.setValue(values[2])
         self.__window.timeout_scroll.setValue(values[3])
         self.__window.each_to_each_check_box.setCheckState(values[4])
+
+        self.__window.lcd_max_amount.display(values[1])
+        self.__window.lcd_min_amount_users.display(values[2])
+        self.__window.lcd_timeout.display(values[3])
 
     def snapping_internal_signals(self):
         self.__window.timeout_scroll.valueChanged.connect(self.change_timeout_scroll_postition)

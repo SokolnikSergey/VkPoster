@@ -58,7 +58,9 @@ class SettingsWindow(QWidget):
         self.min_amount_users_scroll = QSlider(Qt.Horizontal, self)
         self.min_amount_users_scroll.setPageStep(500)
         self.min_amount_users_scroll.setTickPosition(2)
-        self.min_amount_users_scroll.setRange(0, 20000)
+        self.min_amount_users_scroll.setMinimum(25)
+
+        self.min_amount_users_scroll.setRange(25, 20000)
 
     def create_buttons(self):
         self.save_btn = QPushButton("Save Changes",self)
