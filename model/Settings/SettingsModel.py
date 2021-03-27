@@ -9,7 +9,7 @@ class SettingsModel(QObject):
     update_settings = pyqtSignal(list)
 
 
-    def __init__(self,country_id = 3,max_amount_of_groups = 50,min_amount_of_users = 100,timeout_between_operations = 5,each_to_each = 0):
+    def __init__(self,country_id = 3,max_amount_of_groups = 50,min_amount_of_users = 100, timeout_between_operations = 10,each_to_each = 0):
         super(SettingsModel, self).__init__()
 
         self.__country_id = country_id
@@ -18,6 +18,7 @@ class SettingsModel(QObject):
         self.__timeout_between_operations = timeout_between_operations
         self.__each_to_each = each_to_each
 
+        self.__on_start_settings_values = self.collect_values()
         self.create_view()
 
         self.set_begins_view_values()
@@ -26,8 +27,11 @@ class SettingsModel(QObject):
     def create_view(self):
         self.__view_operator = SettingsWindowOperator(SettingsWindow())
 
-    def set_begins_view_values(self):
-        self.__view_operator.set_begins_values(self.collect_values())
+    def set_begins_view_values(self, values = None):
+        if values is None:
+            self.__view_operator.set_begins_values(self.collect_values())
+        else:
+            self.__view_operator.set_begins_values(values)
 
     @property
     def country_id(self):
@@ -82,10 +86,12 @@ class SettingsModel(QObject):
 
     def save_settings(self):
         list_of_settings = self.collect_values()
+        self.__on_start_settings_values = self.collect_values()
         self.update_settings.emit(list_of_settings)
 
 
     def show(self):
+        self.set_begins_view_values(self.__on_start_settings_values)
         self.__view_operator.show()
 
     def hide(self):
