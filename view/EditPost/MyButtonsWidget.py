@@ -21,6 +21,9 @@ class MyButtonsWidget(QWidget,QObject):
         return self.__painter
 
     def create_buttons(self):
+        self.btn_back = QPushButton("Back", self)
+        self.btn_back.setStyleSheet("background-color: rgb(255,167,167)")
+
         self.btn_del_photo = QPushButton("Delete photo",self)
         self.btn_delete_all_photos = QPushButton("Delete all photos", self)
         self.btn_add_new_photos = QPushButton("Add new photos", self)
@@ -29,6 +32,7 @@ class MyButtonsWidget(QWidget,QObject):
     def create_layout(self):
         qhb = QHBoxLayout()
         qhb.addWidget(self.btn_del_photo)
+        qhb.addWidget(self.btn_back)
         qhb.addWidget(self.btn_delete_all_photos)
         qhb.addWidget(self.btn_add_new_photos)
         qhb.addWidget(self.btn_save_post)

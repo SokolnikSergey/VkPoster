@@ -59,5 +59,6 @@ class EditPostViewOperator(QObject):
         self.__window.widget_for_buttons.btn_add_new_photos.clicked.connect(self.processing_file_dialog)
         self.__window.widget_for_buttons.btn_save_post.clicked.connect(self.save_changes)
 
+        self.__window.widget_for_buttons.btn_back.clicked.connect(self.edit_post_closed)
         self.__window.edit_post_closed.connect(self.edit_post_closed)
 
