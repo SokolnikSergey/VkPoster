@@ -21,6 +21,10 @@ class ChosePostForEditModel(QObject):
 
     btn_back_pressed = pyqtSignal()
 
+    occured_warning = pyqtSignal(str, object, tuple)  ##signal to fill warning pop-up message
+                                                    # (str = text,object = fix method
+                                                    # tuple = params for fix method)
+
     def __init__(self, post_container, post_container_publisher=None):
         super(ChosePostForEditModel, self).__init__()
         self.__choose_post_for_edit_win_operator = None
@@ -60,6 +64,8 @@ class ChosePostForEditModel(QObject):
         self.__choose_post_for_edit_win_operator.hide()
 
     def snapping_signals(self):
+        self.__choose_post_for_edit_win_operator.occured_warning_view.connect(self.occured_warning)
+
         self.__post_container_subscriber.posts_added.connect(self.add_posts_to_post_container)
         self.__post_container_subscriber.posts_removed.connect(self.remove_post_from_container)
         self.__post_container_subscriber.container_cleared.connect(self.clear_post_container)

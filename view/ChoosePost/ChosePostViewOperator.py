@@ -10,6 +10,7 @@ class ChosePostViewOperator(QObject):
     choose_post_closed = pyqtSignal()
 
     btn_back_clicked = pyqtSignal()
+    occured_warning_view = pyqtSignal(str, object, tuple)  ##signal to fill warning pop-up message
 
     def __init__(self,view):
         super(ChosePostViewOperator, self).__init__()
@@ -51,6 +52,8 @@ class ChosePostViewOperator(QObject):
         current_item = self.__window.list_post_widget.currentItem()
         if current_item:
             self.delete_post_signal.emit(current_item.whatsThis())
+        else:
+            self.occured_warning_view.emit("Choose at least one post to delete it", None, ())
 
     def add_new_post_clicked(self):
         self.add_new_post_signal.emit()

@@ -146,7 +146,7 @@ class MainStarter(QObject):
 
     def create_and_bind_handlers(self):
         self.__ex_signals_binder = ExceptionSignalsBinder\
-            (self.__handlder_ex,self.__post_to_group_model,self.__edit_post_model,
+            (self.__handlder_ex,self.__post_to_group_model, self.__chose_post_for_edit,self.__edit_post_model,
              self.__liable_about_view,self.__warning_message,self.__vk_operator)
 
     def create_action_delayer(self):
