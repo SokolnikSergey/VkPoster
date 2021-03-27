@@ -68,9 +68,7 @@ class PostToGroupModel(QObject):
         if (PostToGroupController.is_allowed_search_post(key_word)):
             self.search_groups_by_key_word_signal.emit(key_word)
         else:
-            self.occured_warning.emit("There is no keyword for searching groups,Please"
-                                      "Enter KeyWord",None,())
-
+            self.occured_warning.emit("There is no keyword for searching groups. Please, enter key word",None,())
 
     def recover_groups_by_ids(self, ids):
         return [group for group in self.__group_container.list_of_groups if str(group.gid) in ids]
