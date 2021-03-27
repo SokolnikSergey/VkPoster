@@ -1,9 +1,11 @@
 from PyQt5.QtWidgets import QMessageBox
+from PyQt5.QtGui import QIcon
 
 
 class AcceptLeaveApp(QMessageBox):
     def __init__(self):
         super(AcceptLeaveApp, self).__init__()
+        self.setWindowIcon(QIcon('../../model/AuxElements/icon.png'))
         self.setWindowTitle('Need authorization')
         self.set_texts("Application doesn't work without signed in account",
                        "Start authorization?")
