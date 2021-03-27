@@ -1,6 +1,7 @@
 from model.MyListWidgetItem.MyListWidgetItem import MyListWidgetItem
 from PyQt5.QtCore import QObject,QSize,pyqtSignal
 from PyQt5.QtWidgets import QListWidgetItem
+from PyQt5.QtWidgets import QMessageBox
 
 class ChosePostViewOperator(QObject):
 
@@ -48,10 +49,20 @@ class ChosePostViewOperator(QObject):
     def double_clicked_under_item(self,item):
         self.chose_post_signal.emit(item.whatsThis())
 
+    def show_confirmation_delete_post(self):
+        msgBox = QMessageBox()
+        msgBox.setIcon(QMessageBox.Information)
+        msgBox.setText("Do you really want to delete the post?")
+        msgBox.setWindowTitle("Delete post?")
+        msgBox.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
+
+        return msgBox.exec()
+
     def delete_post_clicked(self):
         current_item = self.__window.list_post_widget.currentItem()
         if current_item:
-            self.delete_post_signal.emit(current_item.whatsThis())
+            if self.show_confirmation_delete_post() == QMessageBox.Ok:
+                self.delete_post_signal.emit(current_item.whatsThis())
         else:
             self.occured_warning_view.emit("Choose at least one post to delete it", None, ())
 
