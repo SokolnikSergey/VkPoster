@@ -34,6 +34,7 @@ class SettingsWindowOperator(QObject):
         self.__window.country_id_combobx.currentIndexChanged.connect(self.country_id_changed)
 
         self.__window.window_closed.connect(self.close_settings_window)
+        self.__window.btn_back.clicked.connect(self.close_settings_window)
 
         self.__window.save_btn.clicked.connect(self.save_settings_signal)
 

@@ -63,6 +63,9 @@ class SettingsWindow(QWidget):
     def create_buttons(self):
         self.save_btn = QPushButton("Save Changes",self)
 
+        self.btn_back = QPushButton("Back", self)
+        self.btn_back.setStyleSheet("background-color: rgb(255,167,167)")
+
     def create_check_boxes(self):
         self.each_to_each_check_box = QCheckBox("Each Post to Each Group",self)
 
@@ -94,9 +97,13 @@ class SettingsWindow(QWidget):
         self.qh_min_amount_users.addWidget(self.min_amount_users_scroll)
         self.qh_min_amount_users.addWidget(self.lcd_min_amount_users)
 
-        self.qh_each_save = QHBoxLayout()
-        self.qh_each_save.addWidget(self.each_to_each_check_box)
-        self.qh_each_save.addWidget(self.save_btn)
+        self.qh_each = QHBoxLayout()
+        self.qh_each.addWidget(self.each_to_each_check_box)
+
+        self.qh_save_back = QHBoxLayout()
+        self.qh_save_back.addWidget(self.btn_back)
+        self.qh_save_back.addWidget(self.save_btn)
+
 
         self.qv_box1 = QVBoxLayout()
 
@@ -107,7 +114,8 @@ class SettingsWindow(QWidget):
         self.qv_box1.addLayout(self.qh_max_amount,1)
         self.qv_box1.addWidget(self.lbl_amount_of_users,1)
         self.qv_box1.addLayout(self.qh_min_amount_users,1)
-        self.qv_box1.addLayout(self.qh_each_save)
+        self.qv_box1.addLayout(self.qh_each)
+        self.qv_box1.addLayout(self.qh_save_back)
 
         self.setLayout(self.qv_box1)
 
