@@ -49,6 +49,7 @@ class LiableAboutView:
         self.__edit_post.hide()
 
     def show_warning_message(self,text):
+        self.__warning_message.setWindowTitle('Error(TTH)')
         self.__warning_message.setText(text)
         self.__warning_message.show()
 

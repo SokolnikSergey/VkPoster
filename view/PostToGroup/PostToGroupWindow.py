@@ -14,7 +14,7 @@ class PostToGroupWindow(QWidget):
 
     def setting_group_post_window(self):
         self.setGeometry(100, 100, 500, 500)
-        self.setWindowTitle("SpammerGroupsByPosts")
+        self.setWindowTitle("Send Posts To Posts")
 
     def create_buttons_and_labels(self):
         self.lable_amount_actions = QLabel("Amount Actions to Execute = 0")
