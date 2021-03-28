@@ -14,7 +14,6 @@ class VkOperations:
             offset = 0
             while ( len(list_avaliable_groups) < max_amount):
                 list_recieved_groups = VkOperations.get_group_with_offset(vk_api,key_word,100,offset,country_id)
-                print(list_recieved_groups)
                 if list_recieved_groups is not None:
                     if not len(list_recieved_groups):
                         break
@@ -59,9 +58,7 @@ class VkOperations:
     def  send_post_to_group(vk_api,text,list_of_photos,gid):
         photos_id = ''
         for id_of_photo in list_of_photos:
-            print(id_of_photo)
             photos_id += id_of_photo+","
-        print(photos_id)
 
         try:
 

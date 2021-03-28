@@ -36,7 +36,6 @@ class DBOperations:
 
     @staticmethod
     def edit_value_of_record(db,key,new_value):
-        print(new_value)
         db[key] = new_value
 
     @staticmethod
