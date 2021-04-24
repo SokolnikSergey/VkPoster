@@ -55,7 +55,10 @@ class MainStarter(QObject):
         self.create_auxiliary_elements()
         self.__start_choice_model.show()
         self.__splash_screen.hide()
+
+        self.create_messages_and_warnings()
         self.check_existing_of_token()
+        self.inform_relogin_if_user_blocked(self.__vk_session_data.vk_api)
 
     def accept_exit(self):
         if self.__accept_leave_app.exec() == AcceptLeaveApp.Ok:
@@ -91,18 +94,29 @@ class MainStarter(QObject):
             opener = "open" if sys.platform == "darwin" else "xdg-open"
             subprocess.call([opener, "../AuxElements/Helper.chm"])
 
+    def inform_relogin_if_user_blocked(self, vk_api):
+        try:
+            vk_api.users.account.getInfo(v="5.73")
+        except Exception as ex:
+            if str(ex).split(".")[0] == '5':
+                self.__accept_leave_app.set_texts("The account is blocked by VK", "Start another authorization?")
+                self.show_get_token_or_exit()
+
     def check_existing_of_token(self):
         token = self.__vk_session_data.token
         if not token:
-            if self.accept_exit():
-                app.exit()
-            else:
-                self.get_token()
-
+            self.__accept_leave_app.set_texts("Application doesn't work without signed in account", "Start authorization?")
+            self.show_get_token_or_exit()
 
     def get_token(self):
         self.__vk_authorization_model.show()
         self.__vk_authorization_model.start_authorization()
+
+    def show_get_token_or_exit(self):
+        if self.accept_exit():
+            sys.exit()
+        else:
+            self.get_token()
 ###############################################################
 
     def create_auxiliary_elements(self):
@@ -114,7 +128,6 @@ class MainStarter(QObject):
 
         self.create_vk_session_data()
         self.create_vk_session_data_configurator(self.__vk_session_data)
-        self.create_messages_and_warnings()
         self.create_containers()
         self.create_action_executors(self.__vk_session_data)
         self.create_models()
