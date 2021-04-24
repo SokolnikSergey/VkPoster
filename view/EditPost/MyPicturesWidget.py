@@ -1,6 +1,7 @@
 from PyQt5.QtWidgets import QWidget
 from PyQt5.QtGui import QPainter
-from PyQt5.QtCore import QRect
+from PyQt5.QtCore import QRect, Qt
+
 import time
 
 class MyPicturesWidget(QWidget):
@@ -10,8 +11,8 @@ class MyPicturesWidget(QWidget):
 
     def __init__(self,width,height,list_of_pictures,margin = 5 ,picture_offset = 0):
         super(MyPicturesWidget, self).__init__()
-        self.setting_window(width,height)
         self.__list_pictures = list_of_pictures
+        self.setting_window(width,height)
         self.__margin = margin
         self.__painter = QPainter()
         self.__picture_offset = picture_offset
@@ -88,7 +89,14 @@ class MyPicturesWidget(QWidget):
         x, y, counter = 0, 0, 0
 
         if len(self.__list_pictures):
-            self.painter.drawImage(self.first_picture_size, self.__list_pictures[self.calculate_position(self.picture_offset)])
+            first_image = self.__list_pictures[self.calculate_position(self.picture_offset)]
+            first_image_scaled = first_image.scaled(self.first_picture_size.size().height(), self.first_picture_size.size().width(), Qt.KeepAspectRatio)
+
+            deltaX = (self.first_picture_size.size().width() - first_image_scaled.size().width()) / 2
+            deltaY = (self.first_picture_size.size().height() - first_image_scaled.size().height()) / 2
+
+            self.painter.drawImage(QRect(0 + deltaX, 0 + deltaY, first_image_scaled.size().width(), first_image_scaled.size().height()), first_image_scaled)
+
 
             x+= self.height() + self.margin ## add width of big picture + margin
 
@@ -106,8 +114,14 @@ class MyPicturesWidget(QWidget):
 
                 if (counter > 0 and not counter % 2) :
                     x += w_h + self.__margin ## add width of small picture + margin
-                self.painter.drawImage(QRect(x, y, w_h ,w_h),
-                                       self.__list_pictures[self.calculate_position(i + self.__picture_offset)])
+
+                scaled_image = self.__list_pictures[self.calculate_position(i + self.__picture_offset)].scaled(w_h,w_h, Qt.KeepAspectRatio)
+
+                deltaX = (w_h - scaled_image.size().width()) / 2
+                deltaY = (w_h - scaled_image.size().height()) / 2
+
+                self.painter.drawImage(QRect(x + deltaX, y + deltaY, scaled_image.size().width(), scaled_image.size().height()), scaled_image)
+
                 counter +=1
 
     def paintEvent(self, QPaintEvent):
