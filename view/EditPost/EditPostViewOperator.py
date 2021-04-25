@@ -15,7 +15,8 @@ class EditPostViewOperator(QObject):
 
 
     def save_changes(self):
-        self.save_changes_signal.emit(self.__window.text_edit.toPlainText(),self.__window.widget_for_photos.list_pictures)
+        self.__window.widget_for_photos.set_images_according_to_offset()
+        self.save_changes_signal.emit(self.__window.text_edit.toPlainText(), self.__window.widget_for_photos.list_pictures)
 
     def fill_text(self,new_text):
         if isinstance(new_text,str):

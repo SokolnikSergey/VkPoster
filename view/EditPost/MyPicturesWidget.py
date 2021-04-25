@@ -49,6 +49,20 @@ class MyPicturesWidget(QWidget):
     def painter(self):
         return self.__painter
 
+    def set_images_according_to_offset(self):
+        pictures = self.__list_pictures
+        ordered_pictures = []
+        i = 0
+        offset = self.__picture_offset
+        pictures_lenght = len(pictures)
+
+        while i < pictures_lenght:
+            ordered_pictures.append(pictures[(i + offset) % pictures_lenght ] )
+            i += 1
+
+        self.__picture_offset = 0
+        self.__list_pictures = ordered_pictures
+
     def setting_window(self, w, h):
         self.setGeometry(0, 0, w, h)
 

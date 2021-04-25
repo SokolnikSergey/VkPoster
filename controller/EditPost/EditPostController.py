@@ -4,8 +4,7 @@ class EditPostController:
 
     @staticmethod
     def is_post_changed(source_text,new_text,source_photos,new_photos):
-        if source_text != new_text or len(source_photos)!= len(new_photos) or  \
-                (any([(photo != new_photo) for photo,new_photo in zip(source_photos,new_photos)])):
+        if source_text != new_text or len(source_photos)!= len(new_photos) or  source_photos != new_photos:
             return True
         return False
 
