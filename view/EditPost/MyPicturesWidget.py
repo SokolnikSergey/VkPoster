@@ -1,8 +1,7 @@
 from PyQt5.QtWidgets import QWidget
 from PyQt5.QtGui import QPainter
 from PyQt5.QtCore import QRect, Qt
-
-import time
+from view.EditPost.MyWheelScroller import MyWheelScroller
 
 class MyPicturesWidget(QWidget):
     """This is custom class , which allow draw pictures at any position
@@ -17,6 +16,8 @@ class MyPicturesWidget(QWidget):
         self.__painter = QPainter()
         self.__picture_offset = picture_offset
         self.first_picture_size = QRect()
+        self.__my_wheel_scroller = MyWheelScroller()
+        self.bind_wheel_scroll_signals()
 
     @property
     def picture_offset(self):
@@ -49,6 +50,10 @@ class MyPicturesWidget(QWidget):
     def painter(self):
         return self.__painter
 
+    def bind_wheel_scroll_signals(self):
+        self.__my_wheel_scroller.decrement_offset.connect(self.decrement_picture_offset)
+        self.__my_wheel_scroller.increment_offset.connect(self.increment_picture_offset)
+
     def set_images_according_to_offset(self):
         pictures = self.__list_pictures
         ordered_pictures = []
@@ -68,21 +73,17 @@ class MyPicturesWidget(QWidget):
 
     def increment_picture_offset(self):
         self.__picture_offset += 1
+        self.repaint()
 
     def decrement_picture_offset(self):
         if self.picture_offset:
             self.__picture_offset -= 1
         else:
             self.__picture_offset = len(self.list_pictures) - 1
+        self.repaint()
 
     def calculate_position(self,offset):
         return offset % len(self.__list_pictures)
-
-    def scroll_picture(self,up=False, down=False):
-        if up and not down:
-            self.increment_picture_offset()
-        elif not up and down:
-            self.decrement_picture_offset()
 
     def set_first_picture_size(self,x,y,w,h):
         self.first_picture_size = QRect(x,y,w,h)
@@ -93,11 +94,9 @@ class MyPicturesWidget(QWidget):
     def wheelEvent(self, eventWheel):
         if len(self.list_pictures) > 1:
             if eventWheel.angleDelta().y() > 0:
-                self.scroll_picture(up=True, down=False)
+                self.__my_wheel_scroller.prepend_new_scroll_action(MyWheelScroller.UP_WHEEL_ACTION)
             else:
-                self.scroll_picture(down=True, up=False)
-        self.repaint()
-        time.sleep(0.5)
+                self.__my_wheel_scroller.prepend_new_scroll_action(MyWheelScroller.DOWN_WHEEN_ACTION)
 
     def draw_pictures(self):
         x, y, counter = 0, 0, 0
