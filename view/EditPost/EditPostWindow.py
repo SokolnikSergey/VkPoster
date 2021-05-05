@@ -1,15 +1,13 @@
-from PyQt5.QtWidgets import QWidget,QTextEdit,QVBoxLayout, QLabel, QSizePolicy
-from PyQt5.QtCore import QObject,pyqtSignal, QTimer, Qt
+from PyQt5.QtWidgets import QWidget,QTextEdit,QVBoxLayout
+from PyQt5.QtCore import QObject,pyqtSignal
 from PyQt5.QtGui import QFont
 from view.EditPost.MyPicturesWidget import MyPicturesWidget
 from view.EditPost.MyButtonsWidget import MyButtonsWidget
-
+from view.AuxiliaryElements.BlinkingText import BlinkingText
 
 class EditPostWindow(QWidget,QObject):
-
     edit_post_closed = pyqtSignal()
     WIDTH_FOR_PHOTOS,HEIGHT_FOR_PHOTOS = 300,300
-    BLINKING_TIMEOUT = 1000
 
     def __init__(self):
         super(EditPostWindow, self).__init__()
@@ -17,9 +15,8 @@ class EditPostWindow(QWidget,QObject):
         self.create_and_setting_text_edit("")
         self.__widget_for_photos = MyPicturesWidget(EditPostWindow.WIDTH_FOR_PHOTOS,EditPostWindow.HEIGHT_FOR_PHOTOS,[],5)
         self.__widget_for_buttons = MyButtonsWidget()
-        self.create_info_label()
-        self.__info_label_hidden = False
-        self.start_info_label_blinking()
+        self.__blinking_label = BlinkingText('Hint: Scroll mouse wheel over images to change position')
+        self.__blinking_label.start_blinking()
         self.setLayout(self.create_layouts())
 
     @property
@@ -43,25 +40,7 @@ class EditPostWindow(QWidget,QObject):
         self.__text_edit.setText(text)
         self.__text_edit.setFont(QFont("Times New Roman",15))
 
-    def create_info_label(self):
-        self.__scroll_info_label = QLabel()
-        self.__scroll_info_label.setText("<font>Hint: Scroll mouse wheel over images to change position</font>")
-        self.__scroll_info_label.setAlignment(Qt.AlignCenter)
-        
 
-    def start_info_label_blinking(self):
-        timer = QTimer(self)
-        timer.timeout.connect(self.flashLbl)
-        timer.start(EditPostWindow.BLINKING_TIMEOUT)
-        
-
-    def flashLbl(self):
-        if self.__info_label_hidden == False:
-            self.__scroll_info_label.setStyleSheet("QLabel{ color : red; }")
-            self.__info_label_hidden = True
-        else:
-            self.__scroll_info_label.setStyleSheet("QLabel{ color : black; }")
-            self.__info_label_hidden = False
 
     def my_resize(self):
         self.widget_for_buttons.set_width_for_del_btn(self.widget_for_photos.get_first_picture_size().width())
@@ -76,7 +55,7 @@ class EditPostWindow(QWidget,QObject):
         qv_box.addSpacing(5)
         qv_box.addWidget(self.widget_for_photos,10)
         qv_box.addSpacing(20)
-        qv_box.addWidget(self.__scroll_info_label)
+        qv_box.addWidget(self.__blinking_label.info_label)
         qv_box.addWidget(self.widget_for_buttons,1)
 
         return qv_box
