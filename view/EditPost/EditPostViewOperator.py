@@ -13,7 +13,6 @@ class EditPostViewOperator(QObject):
         self.file_dialog = MyFileDialog()
         self.snapping_internal_signals()
 
-
     def save_changes(self):
         self.__window.widget_for_photos.set_images_according_to_offset()
         self.save_changes_signal.emit(self.__window.text_edit.toPlainText(), self.__window.widget_for_photos.list_pictures)
@@ -45,7 +44,6 @@ class EditPostViewOperator(QObject):
         if self.file_dialog.exec_():
             self.add_photos(PhotoConvertionOperations.convert_paths_to_QImages(self.file_dialog.selectedFiles()))
 
-
     def show(self):
         self.__window.show()
         self.__window.raise_()
@@ -53,6 +51,14 @@ class EditPostViewOperator(QObject):
 
     def hide(self):
         self.__window.hide()
+
+    def show_hint_scroll_images(self):
+        self.__window.blinking_label.info_label.show()
+        self.__window.layout.addWidget(self.__window.blinking_label.info_label)
+
+    def hide_hint_scroll_images(self):
+        self.__window.blinking_label.info_label.hide()
+        self.__window.layout.removeWidget(self.__window.blinking_label.info_label)
 
     def snapping_internal_signals(self):
         self.__window.widget_for_buttons.btn_delete_all_photos.clicked.connect(self.clear_list_of_photos)
@@ -62,4 +68,8 @@ class EditPostViewOperator(QObject):
 
         self.__window.widget_for_buttons.btn_back.clicked.connect(self.edit_post_closed)
         self.__window.edit_post_closed.connect(self.edit_post_closed)
+
+        self.__window.widget_for_photos.images_exists.connect(self.show_hint_scroll_images)
+        self.__window.widget_for_photos.images_absent.connect(self.hide_hint_scroll_images)
+
 

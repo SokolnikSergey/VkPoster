@@ -1,12 +1,15 @@
 from PyQt5.QtWidgets import QWidget
 from PyQt5.QtGui import QPainter
-from PyQt5.QtCore import QRect, Qt
+from PyQt5.QtCore import QRect, Qt, pyqtSignal
 from view.EditPost.MyWheelScroller import MyWheelScroller
 
 class MyPicturesWidget(QWidget):
     """This is custom class , which allow draw pictures at any position
      on this widget . Picture offset is give you a possibility to scroll pictures
      by cyclic shift"""
+
+    images_exists  = pyqtSignal()
+    images_absent  = pyqtSignal()
 
     def __init__(self,width,height,list_of_pictures,margin = 5 ,picture_offset = 0):
         super(MyPicturesWidget, self).__init__()
@@ -101,16 +104,18 @@ class MyPicturesWidget(QWidget):
     def draw_pictures(self):
         x, y, counter = 0, 0, 0
 
+        if len(self.__list_pictures) > 1:
+            self.images_exists.emit()
+        else:
+            self.images_absent.emit()
+
         if len(self.__list_pictures):
             first_image = self.__list_pictures[self.calculate_position(self.picture_offset)]
             first_image_scaled = first_image.scaled(self.first_picture_size.size().height(), self.first_picture_size.size().width(), Qt.KeepAspectRatio)
-
             deltaX = (self.first_picture_size.size().width() - first_image_scaled.size().width()) / 2
             deltaY = (self.first_picture_size.size().height() - first_image_scaled.size().height()) / 2
 
             self.painter.drawImage(QRect(0 + deltaX, 0 + deltaY, first_image_scaled.size().width(), first_image_scaled.size().height()), first_image_scaled)
-
-
             x+= self.height() + self.margin ## add width of big picture + margin
 
             for i in range(1,len(self.__list_pictures)):
@@ -127,14 +132,10 @@ class MyPicturesWidget(QWidget):
 
                 if (counter > 0 and not counter % 2) :
                     x += w_h + self.__margin ## add width of small picture + margin
-
                 scaled_image = self.__list_pictures[self.calculate_position(i + self.__picture_offset)].scaled(w_h,w_h, Qt.KeepAspectRatio)
-
                 deltaX = (w_h - scaled_image.size().width()) / 2
                 deltaY = (w_h - scaled_image.size().height()) / 2
-
                 self.painter.drawImage(QRect(x + deltaX, y + deltaY, scaled_image.size().width(), scaled_image.size().height()), scaled_image)
-
                 counter +=1
 
     def paintEvent(self, QPaintEvent):
