@@ -80,6 +80,8 @@ class EditPostViewOperator(QObject):
 
         self.__window.widget_for_photos.images_exists.connect(self.show_hint_scroll_images)
         self.__window.widget_for_photos.images_absent.connect(self.hide_hint_scroll_images)
+        self.__window.widget_for_photos.image_exists.connect(self.hide_hint_scroll_images)
+
 
         self.__window.widget_for_photos.image_exists.connect(self.show_edit_image_button)
         self.__window.widget_for_photos.images_exists.connect(self.show_edit_several_images_button)
