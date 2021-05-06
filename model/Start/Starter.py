@@ -58,7 +58,6 @@ class MainStarter(QObject):
 
         self.create_messages_and_warnings()
         self.check_existing_of_token()
-        self.inform_relogin_if_user_blocked(self.__vk_session_data.vk_api)
 
     def accept_exit(self):
         if self.__accept_leave_app.exec() == AcceptLeaveApp.Ok:
@@ -103,6 +102,7 @@ class MainStarter(QObject):
                 self.show_get_token_or_exit()
 
     def check_existing_of_token(self):
+        self.inform_relogin_if_user_blocked(self.__vk_session_data.vk_api)
         token = self.__vk_session_data.token
         if not token:
             self.__accept_leave_app.set_texts("Application doesn't work without signed in account", "Start authorization?")
