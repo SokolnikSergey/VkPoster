@@ -1,5 +1,6 @@
 from PyQt5.QtWidgets import QWidget,QPushButton,QListWidget,QHBoxLayout,QVBoxLayout
 from PyQt5.QtCore import QObject,pyqtSignal
+from PyQt5.QtGui import QIcon
 
 class ChosePostWindow(QWidget,QObject):
 
@@ -12,6 +13,7 @@ class ChosePostWindow(QWidget,QObject):
         self.create_buttons()
         self.create_list_widget_and_setting()
         self.set_layout()
+        self.setWindowIcon(QIcon('../../model/AuxElements/icon.png'))
 
 
     def setting_window(self):

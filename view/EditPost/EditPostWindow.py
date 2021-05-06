@@ -1,9 +1,10 @@
 from PyQt5.QtWidgets import QWidget,QTextEdit,QVBoxLayout
 from PyQt5.QtCore import QObject,pyqtSignal
-from PyQt5.QtGui import QFont
+from PyQt5.QtGui import QFont, QIcon
 from view.EditPost.MyPicturesWidget import MyPicturesWidget
 from view.EditPost.MyButtonsWidget import MyButtonsWidget
 from view.AuxiliaryElements.BlinkingText import BlinkingText
+from PyQt5.QtGui import QIcon
 
 class EditPostWindow(QWidget,QObject):
     edit_post_closed = pyqtSignal()
@@ -17,6 +18,7 @@ class EditPostWindow(QWidget,QObject):
         self.__widget_for_buttons = MyButtonsWidget()
         self.__blinking_label = BlinkingText('Hint: Scroll mouse wheel over images to change position')
         self.__blinking_label.start_blinking()
+        self.setWindowIcon(QIcon('../../model/AuxElements/icon.png'))
 
         self.__layout = self.create_layouts()
         self.setLayout(self.__layout)

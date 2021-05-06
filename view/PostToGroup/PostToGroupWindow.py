@@ -1,6 +1,7 @@
 from PyQt5.QtWidgets import QWidget,QPushButton,QLabel,QVBoxLayout,QHBoxLayout,QListWidget,QCheckBox
 from PyQt5.QtWidgets import QLineEdit
 from PyQt5.QtGui import QFont
+from PyQt5.QtGui import QIcon
 
 class PostToGroupWindow(QWidget):
 
@@ -10,11 +11,12 @@ class PostToGroupWindow(QWidget):
         self.setting_group_post_window()
         self.create_buttons_and_labels()
         self.create_layouts()
+        self.setWindowIcon(QIcon('../../model/AuxElements/icon.png'))
 
 
     def setting_group_post_window(self):
         self.setGeometry(100, 100, 500, 500)
-        self.setWindowTitle("Send Posts To Posts")
+        self.setWindowTitle("Send Posts To Groups")
 
     def create_buttons_and_labels(self):
         self.lable_amount_actions = QLabel("Amount Actions to Execute = 0")
