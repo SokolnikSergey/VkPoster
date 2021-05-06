@@ -11,6 +11,7 @@ class MyPicturesWidget(QWidget):
     image_exists   = pyqtSignal()
     images_exists  = pyqtSignal()
     images_absent  = pyqtSignal()
+    first_picture_size_changed  = pyqtSignal(int)
 
     def __init__(self,width,height,list_of_pictures,margin = 5 ,picture_offset = 0):
         super(MyPicturesWidget, self).__init__()
@@ -90,6 +91,7 @@ class MyPicturesWidget(QWidget):
         return offset % len(self.__list_pictures)
 
     def set_first_picture_size(self,x,y,w,h):
+        self.first_picture_size_changed.emit(w)
         self.first_picture_size = QRect(x,y,w,h)
 
     def get_first_picture_size(self):

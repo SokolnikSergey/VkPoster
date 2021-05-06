@@ -87,3 +87,5 @@ class EditPostViewOperator(QObject):
         self.__window.widget_for_photos.images_exists.connect(self.show_edit_several_images_button)
         self.__window.widget_for_photos.images_absent.connect(self.hide_edit_images_button)
 
+        self.__window.widget_for_photos.first_picture_size_changed.connect(self.__window.widget_for_buttons.set_width_for_del_btn)
+
