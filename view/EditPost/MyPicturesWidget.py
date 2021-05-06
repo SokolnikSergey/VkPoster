@@ -8,6 +8,7 @@ class MyPicturesWidget(QWidget):
      on this widget . Picture offset is give you a possibility to scroll pictures
      by cyclic shift"""
 
+    image_exists   = pyqtSignal()
     images_exists  = pyqtSignal()
     images_absent  = pyqtSignal()
 
@@ -103,8 +104,9 @@ class MyPicturesWidget(QWidget):
 
     def draw_pictures(self):
         x, y, counter = 0, 0, 0
-
-        if len(self.__list_pictures) > 1:
+        if  len(self.__list_pictures)  == 1:
+            self.image_exists.emit()
+        elif len(self.__list_pictures) > 1:
             self.images_exists.emit()
         else:
             self.images_absent.emit()

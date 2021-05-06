@@ -60,6 +60,15 @@ class EditPostViewOperator(QObject):
         self.__window.blinking_label.info_label.hide()
         self.__window.layout.removeWidget(self.__window.blinking_label.info_label)
 
+    def show_edit_image_button(self):
+        self.__window.widget_for_buttons.toggle_show_edit_buttons(1)
+
+    def show_edit_several_images_button(self):
+        self.__window.widget_for_buttons.toggle_show_edit_buttons(2)
+
+    def hide_edit_images_button(self):
+        self.__window.widget_for_buttons.toggle_show_edit_buttons(0)
+
     def snapping_internal_signals(self):
         self.__window.widget_for_buttons.btn_delete_all_photos.clicked.connect(self.clear_list_of_photos)
         self.__window.widget_for_buttons.btn_del_photo.clicked.connect(self.remove_photo)
@@ -72,4 +81,7 @@ class EditPostViewOperator(QObject):
         self.__window.widget_for_photos.images_exists.connect(self.show_hint_scroll_images)
         self.__window.widget_for_photos.images_absent.connect(self.hide_hint_scroll_images)
 
+        self.__window.widget_for_photos.image_exists.connect(self.show_edit_image_button)
+        self.__window.widget_for_photos.images_exists.connect(self.show_edit_several_images_button)
+        self.__window.widget_for_photos.images_absent.connect(self.hide_edit_images_button)
 

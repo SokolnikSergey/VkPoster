@@ -48,3 +48,13 @@ class MyButtonsWidget(QWidget,QObject):
         else:
             self.btn_del_photo.setFixedWidth(MyButtonsWidget.DEFAULT_WIDTH_DEL_BTN)
 
+    def toggle_show_edit_buttons(self, images_count):
+        if images_count == 0 :
+            self.btn_del_photo.hide()
+            self.btn_delete_all_photos.hide()
+        elif images_count == 1:
+            self.btn_del_photo.show()
+            self.btn_delete_all_photos.hide()
+        else:
+            self.btn_del_photo.show()
+            self.btn_delete_all_photos.show()
