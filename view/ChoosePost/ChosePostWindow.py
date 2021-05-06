@@ -1,6 +1,7 @@
 from PyQt5.QtWidgets import QWidget,QPushButton,QListWidget,QHBoxLayout,QVBoxLayout
 from PyQt5.QtCore import QObject,pyqtSignal
 from PyQt5.QtGui import QIcon
+from view.AuxiliaryElements.BlinkingText import BlinkingText
 
 class ChosePostWindow(QWidget,QObject):
 
@@ -12,6 +13,7 @@ class ChosePostWindow(QWidget,QObject):
         self.setting_window()
         self.create_buttons()
         self.create_list_widget_and_setting()
+        self.__blinking_label.start_blinking()
         self.set_layout()
         self.setWindowIcon(QIcon('../../model/AuxElements/icon.png'))
 
@@ -30,6 +32,8 @@ class ChosePostWindow(QWidget,QObject):
         self.btn_backed = QPushButton("Back")
         self.btn_backed.setMinimumHeight(30)
         self.btn_backed.setStyleSheet("background-color: rgb(255,167,167)")
+
+        self.__blinking_label = BlinkingText('Hint: Double click on post to start edit')
 
     def create_list_widget_and_setting(self):
         self.list_post_widget = QListWidget(self)
@@ -52,7 +56,7 @@ class ChosePostWindow(QWidget,QObject):
         return qv_b
 
     def set_layout(self):
-        self.setLayout(self.creating_layouts([self.list_post_widget],
+        self.setLayout(self.creating_layouts([self.__blinking_label.info_label, self.list_post_widget],
                     [self.btn_backed,self.btn_add_new_post,self.btn_delete_post]))
 
 
