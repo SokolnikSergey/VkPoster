@@ -14,9 +14,15 @@ class ChosePostWindow(QWidget,QObject):
         self.create_buttons()
         self.create_list_widget_and_setting()
         self.__blinking_label.start_blinking()
+        self.__blinking_label.info_label.hide()
+
         self.set_layout()
         self.setWindowIcon(QIcon('../../model/AuxElements/icon.png'))
 
+
+    @property
+    def blinking_label(self):
+        return self.__blinking_label
 
     def setting_window(self):
         self.setWindowTitle("Edit Post")

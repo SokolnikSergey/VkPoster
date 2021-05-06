@@ -27,6 +27,9 @@ class ChosePostViewOperator(QObject):
             else:
                 i+=1
 
+        if len(self.__window.list_post_widget) == 0:
+            self.__window.blinking_label.info_label.hide()
+
     def add_item_to_post_list_widget(self,text,list_of_photos):
         item = QListWidgetItem()
         item.setSizeHint(QSize(200, 100))
@@ -36,6 +39,9 @@ class ChosePostViewOperator(QObject):
         item.setWhatsThis(text)
 
     def add_items_to_post_list_widget(self,posts):
+        if len(posts) > 0:
+            self.__window.blinking_label.info_label.show()
+
         for post in posts:
             self.add_item_to_post_list_widget(post.text,post.list_of_photos)
 
@@ -76,6 +82,7 @@ class ChosePostViewOperator(QObject):
         self.__window.btn_add_new_post.clicked.connect(self.add_new_post_clicked)
 
         self.__window.btn_backed.clicked.connect(self.btn_back_clicked)
+
 
     def show(self):
         self.__window.show()
