@@ -46,8 +46,6 @@ class PostToGroupWindow(QWidget):
         self.primary_group_key_label = QLabel("Input primary word of group")
         self.btn_search_groups = QPushButton("Search Groups")
 
-        self.seperate_info_text = QLabel("Settings buttons",self)
-
     def create_layouts(self):
         #######creating layouts
 
@@ -79,7 +77,6 @@ class PostToGroupWindow(QWidget):
         self.qv_box.addWidget(self.list_group_widget)
 
         self.qv_box.addWidget(self.btn_start_spam)
-        self.qv_box.addWidget(self.seperate_info_text)
         self.qv_box.addLayout(self.qh_box)
 
         self.setLayout(self.qv_box)
