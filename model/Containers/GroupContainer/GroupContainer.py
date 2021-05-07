@@ -45,34 +45,6 @@ class GroupContainer(ContainerPublisher,AbstractContainer,):
                 self.__list_of_groups.remove(group)
                 self.removed([group])
 
-    def remove_group_by_id(self,id_for_remove):
-        removed_group = []
-        for group in self.list_of_groups:
-            if(group.gid == id_for_remove):
-                self.list_of_groups.remove(group)
-                removed_group.append(group)
-        if len(removed_group):
-            self.removed(removed_group)
-
-    def remove_group_by_title(self,title_to_remove):
-        removed_group = []
-        for group in self.list_of_groups:
-            if ( group.title == title_to_remove ) :
-                self.list_of_groups.remove(group)
-                removed_group.append(group)
-
-        if len(removed_group):
-            self.removed(removed_group)
-
-    def remove_groups_by_is_allow(self,is_allowed_to_remove):
-
-        removed_group = []
-        for group in self.list_of_groups:
-            if (group.is_allow_post == is_allowed_to_remove):
-                self.list_of_groups.remove(group)
-                removed_group.append(group)
-        if len(removed_group):
-            self.removed(removed_group)
 ###################################################################
 
     def added(self,groups):
