@@ -1,7 +1,7 @@
 from PyQt5.QtWidgets import QLabel,QWidget
 from PyQt5.QtGui import QPainter
 from PyQt5.Qt import QRect,Qt
-
+from PyQt5.QtGui import QImage
 
 class MyListWidgetItem(QLabel):
     """This class   contains text and photo, which painted by paintEvent
@@ -19,6 +19,9 @@ class MyListWidgetItem(QLabel):
     def set_data(self,text,photos):
         self.text = text
         self.images = photos
+        if self.images is None or len(self.images) == 0:
+            self.images = [QImage("../../model/AuxElements/no_image.jpg")]
+
 
     def set_margins(self,margin_photo,margin_text):
         self.margin_photo = margin_photo
