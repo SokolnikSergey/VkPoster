@@ -23,6 +23,10 @@ class PostToGroupWindowOperator(QObject):
         self.__previous_text = ""
         self.snapping_internal_signals()
 
+        self.__last_cleared_groups = []
+        self.__last_group_states = []
+        self.__last_scroll_state = None
+
     def snapping_internal_signals(self):
         self.__window.list_post_widget.itemPressed.connect(self.toggle_post_list_checked)
 
@@ -38,7 +42,6 @@ class PostToGroupWindowOperator(QObject):
         self.__window.check_box_all_ticks_groups.stateChanged.connect(self.toggle_all_ticks_groups)
         self.__window.btn_back.clicked.connect(self.btn_back_clicked)
         self.__window.btn_recover_actions.clicked.connect(self.btn_recover_actions_clicked)
-
 
     @property
     def previous_text(self):
@@ -117,21 +120,26 @@ class PostToGroupWindowOperator(QObject):
         text = "=".join(text)
         self.__window.lable_amount_actions.setText(text)
 
-    def add_item_to_group_list_widget(self,title,photo,gid):
+    def add_item_to_group_list_widget(self,title,photo,gid, widget_checked_state):
 
         item = QListWidgetItem()
         item.setSizeHint(QSize(200, 100))
         item.setFlags(item.flags() | Qt.ItemIsUserCheckable)
-        item.setCheckState(2)
+        item.setCheckState(widget_checked_state)
         l = MyListWidgetItem(title,photo, 5, 10)
         self.__window.list_group_widget.addItem(item)
         self.__window.list_group_widget.setItemWidget(item, l)
         item.setWhatsThis(str(gid))
 
-    def add_items_to_group_list_widget(self,groups):
-
+    def add_items_to_group_list_widget(self, groups):
+        counter = 0
+        the_same_groups = self.is_the_same_groups(groups)
         for group in groups:
-            self.add_item_to_group_list_widget(group.title,[group.photo],group.gid)
+            state = self.__last_group_states[counter] if the_same_groups else Qt.Checked
+            self.add_item_to_group_list_widget(group.title,[group.photo],group.gid, state)
+            counter += 1
+        if the_same_groups and self.__last_scroll_state is not None:
+            self.__window.list_group_widget.verticalScrollBar().setValue(self.__last_scroll_state)
 
     def add_items_to_post_list_widget(self,posts):
         for post in posts:
@@ -142,8 +150,14 @@ class PostToGroupWindowOperator(QObject):
         self.__window.list_post_widget.clear()
         self.add_items_to_post_list_widget(list_of_posts)
 
-    def fill_groups_list_widget(self,list_of_groups):
+    def is_the_same_groups(self, new_groups):
+        current_gids = []
+        for group in new_groups:
+            current_gids.append(group.gid)
 
+        return self.__last_cleared_groups == current_gids
+
+    def fill_groups_list_widget(self,list_of_groups):
         self.__window.list_post_widget.clear()
         self.add_items_to_group_list_widget(list_of_groups)
 
@@ -151,6 +165,13 @@ class PostToGroupWindowOperator(QObject):
         self.__window.list_post_widget.clear()
 
     def clear_groups_list_widget(self):
+        self.__last_cleared_groups = []
+
+        self.__last_scroll_state = self.__window.list_group_widget.verticalScrollBar().value()
+        for x in range(self.__window.list_group_widget.count()):
+            self.__last_cleared_groups.append(int(self.__window.list_group_widget.item(x).whatsThis()))
+            self.__last_group_states.append(self.__window.list_group_widget.item(x).checkState())
+
         self.__window.list_group_widget.clear()
 
     def search_groups_clicked(self):

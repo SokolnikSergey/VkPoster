@@ -13,7 +13,7 @@ class Binder:
         self.__model.add_groups_to_group_container.connect(self.__view_operator.add_items_to_group_list_widget)
         self.__model.remove_groups_from_container.connect(self.__view_operator.remove_items_from_group_list_widget)
         self.__model.clear_group_container.connect(self.__view_operator.clear_groups_list_widget)
-        self.__model.update_group_container.connect(self.__view_operator. fill_groups_list_widget)
+        self.__model.update_group_container.connect(self.__view_operator.fill_groups_list_widget)
         self.__model.amout_of_actions_changed.connect(self.__view_operator.update_amount_of_actions)
 
         self.__view_operator.search_groups_signal.connect(self.__model.search_groups_by_key_word)
