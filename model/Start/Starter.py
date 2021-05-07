@@ -86,6 +86,9 @@ class MainStarter(QObject):
         self.__post_to_group_model.recover_actions_clicked.connect(self.__action_delayer.read_actions_from_file)
         self.__post_to_group_model.btn_helper_clecked.connect(self.start_helper)
 
+        self.__vk_operator.uploaded_thread.need_to_upload_photos.connect(self.__post_to_group_model.show_start_upload_image)
+        self.__vk_operator.uploaded_thread.data_have_uploaded_to_vk.connect(self.__post_to_group_model.hide_start_upload_image)
+
     def start_helper(self):
         if sys.platform == "win32":
             os.startfile("../AuxElements/Helper.chm")

@@ -190,6 +190,12 @@ class PostToGroupWindowOperator(QObject):
     def activate_send_posts(self):
         self.__window.btn_start_spam.setEnabled(True)
 
+    def show_upload_image_text(self):
+        self.__window.blinking_label.info_label.show()
+        self.__window.blinking_label.start_blinking()
+
+    def hide_upload_image_text(self):
+        self.__window.blinking_label.info_label.hide()
 
     ###########################
 

@@ -2,6 +2,7 @@ from PyQt5.QtCore import QObject,pyqtSignal,QThread
 class DataUploadThread(QThread,QObject):
 
     data_have_uploaded_to_vk = pyqtSignal(list)
+    need_to_upload_photos = pyqtSignal()
 
     def __init__(self,logger,vk_api = None , photo_manager = None,data = [].copy()):
         super(DataUploadThread, self).__init__()
@@ -31,6 +32,10 @@ class DataUploadThread(QThread,QObject):
 
     def upload_photos(self,list_of_photos):
         try:
+
+            if not self.__photo_manager.need_upload_photos(list_of_photos):
+                self.need_to_upload_photos.emit()
+
             self.data[2] = [self.__photo_manager.getPathOfPhoto(self.__vk_api, photo) for photo in list_of_photos]
             self.data_have_uploaded_to_vk.emit(self.data)
             self.__logger.change_name(self.__class__.__name__)

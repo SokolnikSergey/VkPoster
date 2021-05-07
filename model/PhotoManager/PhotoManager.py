@@ -34,6 +34,8 @@ class PhotoManager(Subscriber):
             self.__compliances[aid] = container
             self.__compliances_container = container
 
+    def need_upload_photos(self, photos):
+        return all(self.__compliances_container.get_path(photo) for photo in photos)
 
     def  getPathOfPhoto(self,vk_api,photo):
         self.__logger.change_name(self.__class__.__name__)

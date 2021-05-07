@@ -4,6 +4,8 @@ from PyQt5.QtGui import QFont
 from PyQt5.QtGui import QIcon
 
 from view.AuxiliaryElements.ListWidgetCustomScroll import ListWidgetCustomScroll
+from view.AuxiliaryElements.BlinkingText import BlinkingText
+
 
 class PostToGroupWindow(QWidget):
 
@@ -13,6 +15,7 @@ class PostToGroupWindow(QWidget):
         self.setting_group_post_window()
         self.create_buttons_and_labels()
         self.create_layouts()
+        self.blinking_label.info_label.hide()
         self.setWindowIcon(QIcon('../../model/AuxElements/icon.png'))
 
 
@@ -48,6 +51,8 @@ class PostToGroupWindow(QWidget):
         self.primary_group_key_label = QLabel("Input primary word of group")
         self.btn_search_groups = QPushButton("Search Groups")
 
+        self.blinking_label = BlinkingText('Images for post are in progress of uploading...')
+
     def create_layouts(self):
         #######creating layouts
 
@@ -79,6 +84,8 @@ class PostToGroupWindow(QWidget):
         self.qv_box.addWidget(self.list_group_widget)
 
         self.qv_box.addWidget(self.btn_start_spam)
+        self.qv_box.addWidget(self.blinking_label.info_label)
+
         self.qv_box.addLayout(self.qh_box)
 
         self.setLayout(self.qv_box)

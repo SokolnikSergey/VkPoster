@@ -97,6 +97,12 @@ class PostToGroupModel(QObject):
     def hide(self):
         self.__post_to_group_win_operator.hide()
 
+    def show_start_upload_image(self):
+        self.__post_to_group_win_operator.show_upload_image_text()
+
+    def hide_start_upload_image(self):
+        self.__post_to_group_win_operator.hide_upload_image_text()
+
     def snapping_signals(self):
         self.__post_container_subscriber.posts_added.connect(self.add_posts_to_post_container)
         self.__post_container_subscriber.posts_removed.connect(self.remove_post_from_container)

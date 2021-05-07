@@ -33,6 +33,9 @@ class VkOperator(ExecuteAble,QObject,Subscriber):
         self.__session_data_publisher  = session_data_publisher
         self.subscribe(self.__session_data_publisher)
 
+    @property
+    def uploaded_thread(self):
+        return self.__uploaded_thread
 
     def create_threads(self):
         self.__get_groups_thread = GetGroupsThread(self.__logger,self.__vk_api)
