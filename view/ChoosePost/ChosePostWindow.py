@@ -2,6 +2,7 @@ from PyQt5.QtWidgets import QWidget,QPushButton,QListWidget,QHBoxLayout,QVBoxLay
 from PyQt5.QtCore import QObject,pyqtSignal
 from PyQt5.QtGui import QIcon
 from view.AuxiliaryElements.BlinkingText import BlinkingText
+from view.AuxiliaryElements.ListWidgetCustomScroll import ListWidgetCustomScroll
 
 class ChosePostWindow(QWidget,QObject):
 
@@ -42,7 +43,7 @@ class ChosePostWindow(QWidget,QObject):
         self.__blinking_label = BlinkingText('Hint: Double click on post to start edit')
 
     def create_list_widget_and_setting(self):
-        self.list_post_widget = QListWidget(self)
+        self.list_post_widget = ListWidgetCustomScroll()
         self.list_post_widget.setSelectionMode(QListWidget.SingleSelection)
 
     def creating_layouts(self,obj_for_qv = None ,obj_for_qh = None):

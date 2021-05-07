@@ -1,7 +1,9 @@
-from PyQt5.QtWidgets import QWidget,QPushButton,QLabel,QVBoxLayout,QHBoxLayout,QListWidget,QCheckBox
+from PyQt5.QtWidgets import QWidget,QPushButton,QLabel,QVBoxLayout,QHBoxLayout,QCheckBox
 from PyQt5.QtWidgets import QLineEdit
 from PyQt5.QtGui import QFont
 from PyQt5.QtGui import QIcon
+
+from view.AuxiliaryElements.ListWidgetCustomScroll import ListWidgetCustomScroll
 
 class PostToGroupWindow(QWidget):
 
@@ -29,8 +31,8 @@ class PostToGroupWindow(QWidget):
         self.btn_recover_actions = QPushButton("Recover Delayed Actions",self)
        # self.btn_recover_actions.setStyleSheet("color: rgb(200,20,255)")
 
-        self.list_post_widget = QListWidget()
-        self.list_group_widget = QListWidget()
+        self.list_post_widget = ListWidgetCustomScroll()
+        self.list_group_widget = ListWidgetCustomScroll()
         self.list_group_widget.setMinimumHeight(150)
 
         self.btn_start_spam = QPushButton("Send Posts",self)
