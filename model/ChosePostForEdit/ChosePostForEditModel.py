@@ -4,8 +4,6 @@ from PyQt5.QtCore import pyqtSignal, QObject
 from model.ChosePostForEdit.BinderChosePostForEdit import BinderChosePostForEdit
 from model.Containers.PostContainer.PostContainerSubscriber import PostContainerSubscriber
 
-
-
 class ChosePostForEditModel(QObject):
 
     update_post_container = pyqtSignal(list)

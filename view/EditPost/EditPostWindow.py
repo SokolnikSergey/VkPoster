@@ -1,6 +1,6 @@
 from PyQt5.QtWidgets import QWidget,QTextEdit,QVBoxLayout
 from PyQt5.QtCore import QObject,pyqtSignal
-from PyQt5.QtGui import QFont, QIcon
+from PyQt5.QtGui import QFont
 from view.EditPost.MyPicturesWidget import MyPicturesWidget
 from view.EditPost.MyButtonsWidget import MyButtonsWidget
 from view.AuxiliaryElements.BlinkingText import BlinkingText

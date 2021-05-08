@@ -1,8 +1,5 @@
 vk_api_version = "5.73"
 
-import json
-
-
 class VkOperations:
 
     logger = None

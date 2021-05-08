@@ -1,5 +1,3 @@
-
-
 class Group:
     def __init__(self,title="",gid = 0,description ="",photo = "",is_allow_post= 0 ):
         self.__title = title

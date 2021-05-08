@@ -1,8 +1,6 @@
 from PyQt5.QtCore import QObject,pyqtSignal,QSize,Qt
 from PyQt5.QtWidgets import QListWidgetItem
 from model.MyListWidgetItem.MyListWidgetItem import MyListWidgetItem
-from view.PostToGroup.PostToGroupWindow import PostToGroupWindow
-
 
 class PostToGroupWindowOperator(QObject):
 

@@ -1,6 +1,6 @@
 from PyQt5.QtWidgets import QWidget,QPushButton,QHBoxLayout
-from PyQt5.QtGui import QPainter,QImage
-from PyQt5.QtCore import QObject,pyqtSignal
+from PyQt5.QtGui import QPainter
+from PyQt5.QtCore import QObject
 
 
 class MyButtonsWidget(QWidget,QObject):

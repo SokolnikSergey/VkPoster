@@ -1,6 +1,6 @@
 from PyQt5.QtCore import pyqtSignal,  QObject
 from PyQt5.Qt import Qt
-from PyQt5.QtWebEngineWidgets import QWebEngineView as QWebView,QWebEnginePage as QWebPage
+from PyQt5.QtWebEngineWidgets import QWebEngineView as QWebView
 
 class VkAuthWindow(QWebView,QObject):
     """This class for authorization and achieve token  """

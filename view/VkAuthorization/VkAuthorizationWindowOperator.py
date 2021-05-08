@@ -1,4 +1,4 @@
-from PyQt5.QtWebEngineWidgets import QWebEngineView as QWebView,QWebEnginePage as QWebPage
+from PyQt5.QtWebEngineWidgets import QWebEnginePage as QWebPage
 
 from PyQt5.QtCore import QUrl,QObject,pyqtSignal
 import re

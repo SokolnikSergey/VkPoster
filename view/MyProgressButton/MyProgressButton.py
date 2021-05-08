@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QApplication,QPushButton
+from PyQt5.QtWidgets import QPushButton
 from PyQt5.QtGui import QPainter,QBrush
 from PyQt5.Qt import Qt
 
