@@ -20,7 +20,7 @@ class VkOperations:
 
                 for group in list_recieved_groups:
                     if VkOperations.check_valid_of_group(group,min_amount_users):
-                        list_avaliable_groups.append((group['id'],group['name'],group['photo_50']))
+                        list_avaliable_groups.append((group['id'],group['name'],group['photo_100']))
                         if(len(list_avaliable_groups) >= max_amount):
                             break
                 offset += 100
