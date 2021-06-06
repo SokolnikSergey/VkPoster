@@ -38,6 +38,8 @@ from model.Logger.Logger import MyLogger
 from model.ProgressBinder.ProgressBinder import ProgressBinder
 import sys,shelve,os, subprocess
 
+from datetime import datetime
+
 
 from PyQt5.QtWidgets import QApplication
 
@@ -45,6 +47,8 @@ class MainStarter(QObject):
 
     def __init__(self,logger, app):
         super(MainStarter, self).__init__()
+        self.save_start_timestamp()
+
         self.create_splash_screen()
         self.__splash_screen.show()
 
@@ -121,6 +125,10 @@ class MainStarter(QObject):
         else:
             self.get_token()
 ###############################################################
+
+    def save_start_timestamp(self):
+        with open('../AuxElements/start_timestamp', 'w') as f:
+            f.write(str(int(datetime.timestamp(datetime.now()))))
 
     def create_auxiliary_elements(self):
         self.__handlder_ex = ExceptionHandler()
