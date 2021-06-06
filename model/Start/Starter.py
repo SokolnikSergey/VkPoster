@@ -36,6 +36,7 @@ from model.SettingsManager.SettingsManager import SettingsManager
 from model.Settings.SettingsModel import SettingsModel
 from model.Logger.Logger import MyLogger
 from model.ProgressBinder.ProgressBinder import ProgressBinder
+from model.Containers.SendingsContainer import SendingsContainer
 import sys,shelve,os, subprocess
 
 from datetime import datetime
@@ -47,6 +48,7 @@ class MainStarter(QObject):
 
     def __init__(self,logger, app):
         super(MainStarter, self).__init__()
+        self.__start_timestamp = str(int(datetime.timestamp(datetime.now())))
         self.save_start_timestamp()
 
         self.create_splash_screen()
@@ -128,7 +130,7 @@ class MainStarter(QObject):
 
     def save_start_timestamp(self):
         with open('../AuxElements/start_timestamp', 'w') as f:
-            f.write(str(int(datetime.timestamp(datetime.now()))))
+            f.write(self.__start_timestamp)
 
     def create_auxiliary_elements(self):
         self.__handlder_ex = ExceptionHandler()
@@ -210,7 +212,8 @@ class MainStarter(QObject):
     def create_action_executors(self,session_data):
         self.__vk_operator = VkOperator(self.__logger,self.__vk_session_data,self.__group_container,
         session_data.vk_api,PhotoManager(self.__logger,self.__config_container.photo_complience_path,
-                            self.__vk_session_data,PhotoCompliancesContainer([],[]),session_data.album_id ))
+                            self.__vk_session_data,PhotoCompliancesContainer([],[]),session_data.album_id ),
+                            self.__sending_container )
 
         self.__action_executor = ActionExecutor(self.__vk_operator,StorageOperator(self.__logger,
                     self.__post_container,shelve.open(self.__config_container.post_container_path)))
@@ -225,6 +228,8 @@ class MainStarter(QObject):
             self.__actions_queue, [], self.__action_executor)
 
     def create_containers(self):
+
+        self.__sending_container = SendingsContainer(current_file_timestamp=self.__start_timestamp)
         self.__post_container = PostContainer([])
         self.__group_container = GroupContainer([])
         self.__actions_queue = ActionQueue([],[],[])

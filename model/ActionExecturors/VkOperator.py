@@ -17,12 +17,12 @@ class VkOperator(ExecuteAble,QObject,Subscriber):
     occured_warning = pyqtSignal(str,object,tuple)
     actions_delayed= pyqtSignal()
 
-    def __init__(self,logger,session_data_publisher,group_container,vk_api,photo_manager):
+    def __init__(self,logger,session_data_publisher,group_container,vk_api,photo_manager, sending_container):
         super(VkOperator, self).__init__()
 
         self.__logger = logger
         VkOperations.logger = self.__logger
-
+        self.__sending_container = sending_container
         self.__group_container = group_container
         self.__vk_api = vk_api
         self.__photo_manager = photo_manager
@@ -88,13 +88,14 @@ class VkOperator(ExecuteAble,QObject,Subscriber):
 
     def send_post_to_group(self,data):
         try:
-            VkOperations.send_post_to_group(self.__vk_api, data[1],data[2],data[0])
+            VkOperations.send_post_to_group(self.__vk_api, data[1],data[2],data[0]) # group_id,  text, list_of_vk_images
             self.action_has_done.emit()
         except Exception as ex:
             self.action_has_failed.emit()
             if str(ex).split(".")[0] == '220' :
                 self.occured_warning.emit("Too many recipients.You have used all your resources(100 posts - max )\nfor the day. Please continue tomorrow!\n"
                                           "Press Ok to delay actions for next time", self.actions_delayed_accepted, ())
+        self.__sending_container.append_sending_to_file(data[1], data[2], data[0])
 
     def actions_delayed_accepted(self):
         self.actions_delayed.emit()
