@@ -12,8 +12,10 @@ class PostToGroupWindowOperator(QObject):
     btn_helper_clicked = pyqtSignal()
     btn_back_clicked = pyqtSignal()
     btn_recover_actions_clicked = pyqtSignal()
+    btn_make_resendings = pyqtSignal()
 
     btn_change_account_pressed = pyqtSignal()
+    find_resend_post_by_text = pyqtSignal(str)
 
     def __init__(self,view):
         super(PostToGroupWindowOperator, self).__init__()
@@ -40,6 +42,7 @@ class PostToGroupWindowOperator(QObject):
         self.__window.check_box_all_ticks_groups.stateChanged.connect(self.toggle_all_ticks_groups)
         self.__window.btn_back.clicked.connect(self.btn_back_clicked)
         self.__window.btn_recover_actions.clicked.connect(self.btn_recover_actions_clicked)
+        self.__window.btn_make_resendings_clicked.connect(self.btn_make_resendings)
 
     @property
     def previous_text(self):
@@ -75,6 +78,7 @@ class PostToGroupWindowOperator(QObject):
         else:
             item.setCheckState(Qt.Checked)
 
+        self.find_resend_post_by_text.emit(item.whatsThis())
         self.activate_send_posts()
 
     def toggle_group_list_checked(self):
@@ -215,6 +219,12 @@ class PostToGroupWindowOperator(QObject):
 
     def hide_upload_image_text(self):
         self.__window.blinking_label.info_label.hide()
+
+    def show_hint_about_resendings(self, text_to_show):
+        self.__window.append_resending_button(text_to_show)
+
+    def hide_hint_about_resendings(self):
+        self.__window.remove_resending_button()
 
     ###########################
 

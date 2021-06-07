@@ -58,6 +58,7 @@ class MainStarter(QObject):
             app.processEvents()
 
         self.__logger = logger
+        self.__action_maker = None
         self.create_auxiliary_elements()
         self.__start_choice_model.show()
         self.__splash_screen.hide()
@@ -199,8 +200,8 @@ class MainStarter(QObject):
 
     def create_post_to_group(self):
         self.__post_to_group_model = PostToGroupModel(PostContainerWithQImages([]),
-                                                      GroupContainerWithQImages([]), self.__post_container,
-                                                      self.__group_container)
+                                GroupContainerWithQImages([]), self.__post_container,self.__group_container,
+                              self.__sending_container, self.__photo_manager.compliances_container, self.__action_maker)
 
     def create_chose_post_for_edit(self):
         self.__chose_post_for_edit = ChosePostForEditModel(PostContainerWithQImages([]),
@@ -210,10 +211,11 @@ class MainStarter(QObject):
         self.__edit_post_model = EditPostModel()
 
     def create_action_executors(self,session_data):
+        self.__photo_manager = PhotoManager(self.__logger,self.__config_container.photo_complience_path,
+                            self.__vk_session_data,PhotoCompliancesContainer([],[]),session_data.album_id )
+
         self.__vk_operator = VkOperator(self.__logger,self.__vk_session_data,self.__group_container,
-        session_data.vk_api,PhotoManager(self.__logger,self.__config_container.photo_complience_path,
-                            self.__vk_session_data,PhotoCompliancesContainer([],[]),session_data.album_id ),
-                            self.__sending_container )
+        session_data.vk_api,self.__photo_manager,self.__sending_container )
 
         self.__action_executor = ActionExecutor(self.__vk_operator,StorageOperator(self.__logger,
                     self.__post_container,shelve.open(self.__config_container.post_container_path)))
@@ -235,8 +237,10 @@ class MainStarter(QObject):
         self.__actions_queue = ActionQueue([],[],[])
 
     def create_action_binder(self):
+        self.__action_maker = ActionMaker(self.__actions_queue,5,0,0)
+        self.__post_to_group_model.action_maker = self.__action_maker # dirty hack :(
         self.__action_binder = ActionBinder(self.__post_to_group_model,self.__chose_post_for_edit,
-                                            self.__edit_post_model,ActionMaker(self.__actions_queue,5,0,0))
+                                            self.__edit_post_model,self.__action_maker)
 
     def create_liable_about_view(self):
         self.__liable_about_view = LiableAboutView(self.__settings_model, self.__start_choice_model,

@@ -21,6 +21,10 @@ class PhotoManager(Subscriber):
         self.__temp_photo_buffer = QBuffer()
         self.__temp_photo_buffer.open(QIODevice.WriteOnly)
 
+    @property
+    def compliances_container(self):
+        return self.__compliances_container
+
     def fill_compliance_container(self,aid):
 
         self.__compliances = PhotoDBOperations.read_compliences(self.__db)
@@ -38,6 +42,10 @@ class PhotoManager(Subscriber):
         return all(self.__compliances_container.get_path(photo) for photo in photos)
 
     def  getPathOfPhoto(self,vk_api,photo):
+        # it is resending of posts , no need any research
+        if isinstance(photo,str) and photo.startswith('photo'):
+            return photo
+
         self.__logger.change_name(self.__class__.__name__)
         try :
             path = self.__compliances_container.get_path(photo)

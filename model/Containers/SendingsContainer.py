@@ -12,9 +12,8 @@ class SendingsContainer:
             marshal.dump({}, open(self.__path_to_container, 'wb'))
 
     def append_sending_to_file(self, text, images, group_id):
-
         sendings_data = marshal.load(open(self.__path_to_container, 'rb'))
-        key =  hashlib.md5((text.strip() + ','.join(images)).encode("utf-8")).hexdigest()
+        key =  self.get_key(text, images)
         if key in sendings_data:
             current_start_sendings = []
             for sending in sendings_data[key]['sendings']:
@@ -34,9 +33,17 @@ class SendingsContainer:
         })
         marshal.dump(sendings_data, open(self.__path_to_container,'wb'))
 
-    def get_all_post_sendings(self):
-        pass
+
+    def get_key(self, text, images):
+        return hashlib.md5((text.strip() + ','.join(images)).encode("utf-8")).hexdigest()
+
 
     def get_sendings_for_post(self,text, images):
-        pass
+        sendings_data = marshal.load(open(self.__path_to_container, 'rb'))
+        key = self.get_key(text, images)
+        if key in sendings_data:
+            if 'sendings' in sendings_data[key]:
+                return sendings_data[key]['sendings']
+
+
 

@@ -5,6 +5,10 @@ from controller.PostToGroupController.PostToGroupController import PostToGroupCo
 from model.Containers.PostContainer.PostContainerSubscriber import PostContainerSubscriber
 from model.Containers.GroupContainer.GroupContainerSubscriber import GroupContainerSubscriber
 from view.PostToGroup.PostToGroupWindowOperator import PostToGroupWindowOperator
+from model.Containers.GroupContainer.Group import Group
+from model.Containers.PostContainer.Post import Post
+
+from datetime import datetime
 
 
 class PostToGroupModel(QObject):
@@ -36,12 +40,15 @@ class PostToGroupModel(QObject):
                                                     # tuple = params for fix method)
 
     def __init__(self, post_container, group_container, post_container_publisher=None,
-                 group_container_publisher=None):
+                 group_container_publisher=None, sending_container = None, compliance_container = None, action_maker = None):
         super(PostToGroupModel, self).__init__()
         self.__post_to_group_win_operator = None
         self.create_view()
         self.__post_container = post_container
         self.__group_container = group_container
+        self.__sending_container = sending_container
+        self.__compliances_container = compliance_container
+        self.action_maker = action_maker
 
         self.__group_container_subscriber = GroupContainerSubscriber \
             (self.__group_container)
@@ -103,6 +110,39 @@ class PostToGroupModel(QObject):
     def hide_start_upload_image(self):
         self.__post_to_group_win_operator.hide_upload_image_text()
 
+    def get_uploaded_photos_paths(self, list_of_photos):
+        uploaded_photos = []
+        for photo in list_of_photos:
+            uploaded_photo = self.__compliances_container.get_path(photo)
+            if uploaded_photo is not None:
+                uploaded_photos.append(uploaded_photo)
+        return uploaded_photos
+
+    def get_label_to_show_on_resendings(self, resendings):
+        timestamps = []
+        for sending in resendings:
+            timestamps.append(int(sending['timestamp']))
+        label_to_show = f"Resend {len(resendings)} (last at {datetime.fromtimestamp(max(timestamps))})"
+        return label_to_show
+
+    def append_resend_by_post(self, post_text):
+        for post in self.__post_container.list_of_posts:
+            if post.text == post_text:
+                self.__current_post_text = post.text
+                self.__current_uploaded_photos = self.get_uploaded_photos_paths(post.list_of_photos)
+                self.__current__resendings = self.__sending_container.get_sendings_for_post(post.text, self.__current_uploaded_photos)
+                if self.__current__resendings is not None:
+                    resending_btn_label = self.get_label_to_show_on_resendings(self.__current__resendings)
+                    self.__post_to_group_win_operator.show_hint_about_resendings(resending_btn_label)
+                else:
+                    self.__post_to_group_win_operator.hide_hint_about_resendings()
+
+    def resend_posts_for_active_item(self):
+        groups = []
+        for sending in self.__current__resendings:
+            groups.append(Group(gid=sending['group_id']))
+        self.action_maker.create_send_posts_to_groups_actions(groups, [Post(self.__current_uploaded_photos,self.__current_post_text)])
+
     def snapping_signals(self):
         self.__post_container_subscriber.posts_added.connect(self.add_posts_to_post_container)
         self.__post_container_subscriber.posts_removed.connect(self.remove_post_from_container)
@@ -113,3 +153,6 @@ class PostToGroupModel(QObject):
         self.__group_container_subscriber.groups_removed.connect(self.remove_groups_from_container)
         self.__group_container_subscriber.container_cleared.connect(self.clear_group_container)
         self.__group_container_subscriber.group_container_updated.connect(self.update_group_container)
+
+        self.__post_to_group_win_operator.find_resend_post_by_text.connect(self.append_resend_by_post)
+        self.__post_to_group_win_operator.btn_make_resendings.connect(self.resend_posts_for_active_item)

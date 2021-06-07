@@ -2,16 +2,19 @@ from PyQt5.QtWidgets import QWidget,QPushButton,QLabel,QVBoxLayout,QHBoxLayout,Q
 from PyQt5.QtWidgets import QLineEdit
 from PyQt5.QtGui import QFont
 from PyQt5.QtGui import QIcon
+from PyQt5.QtCore import pyqtSignal
+
 
 from view.AuxiliaryElements.ListWidgetCustomScroll import ListWidgetCustomScroll
 from view.AuxiliaryElements.BlinkingText import BlinkingText
 
 
 class PostToGroupWindow(QWidget):
+    btn_make_resendings_clicked = pyqtSignal()
 
     def __init__(self):
         super(PostToGroupWindow, self).__init__()
-
+        self.__resend_button_on_ui = False
         self.setting_group_post_window()
         self.create_buttons_and_labels()
         self.create_layouts()
@@ -20,7 +23,7 @@ class PostToGroupWindow(QWidget):
 
 
     def setting_group_post_window(self):
-        self.setGeometry(100, 100, 500, 500)
+        self.setGeometry(100, 100, 956, 500)
         self.setWindowTitle("Send Posts To Groups")
 
     def create_buttons_and_labels(self):
@@ -35,6 +38,7 @@ class PostToGroupWindow(QWidget):
        # self.btn_recover_actions.setStyleSheet("color: rgb(200,20,255)")
 
         self.list_post_widget = ListWidgetCustomScroll()
+
         self.list_group_widget = ListWidgetCustomScroll()
         self.list_group_widget.setMinimumHeight(150)
 
@@ -53,6 +57,21 @@ class PostToGroupWindow(QWidget):
 
         self.blinking_label = BlinkingText('Images for post are in progress of uploading...')
 
+    def append_resending_button(self, button_text = 'resend posts'):
+        if not self.__resend_button_on_ui:
+            self.btn_make_resendings = QPushButton(button_text, self)
+            self.btn_make_resendings.clicked.connect(self.btn_make_resendings_clicked)
+            self.qh_box2.addWidget(self.btn_make_resendings)
+            self.__resend_button_on_ui = True
+        else:
+            self.btn_make_resendings.setText(button_text)
+
+    def remove_resending_button(self):
+        if self.__resend_button_on_ui:
+            self.btn_make_resendings.deleteLater()
+            self.__resend_button_on_ui = False
+
+
     def create_layouts(self):
         #######creating layouts
 
@@ -69,6 +88,7 @@ class PostToGroupWindow(QWidget):
         self.qh_box2.addWidget(self.primary_group_key_label)
         self.qh_box2.addWidget(self.line_post_name)
         self.qh_box2.addWidget(self.btn_search_groups)
+
         self.qh_box3.addWidget(self.btn_read_all_records)
         self.qh_box3.addWidget(self.btn_help)
         self.qh_box3.addWidget(self.btn_recover_actions)
