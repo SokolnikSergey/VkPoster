@@ -231,7 +231,7 @@ class MainStarter(QObject):
 
     def create_containers(self):
 
-        self.__sending_container = SendingsContainer(current_file_timestamp=self.__start_timestamp)
+        self.__sending_container = SendingsContainer(current_start_timestamp=self.__start_timestamp)
         self.__post_container = PostContainer([])
         self.__group_container = GroupContainer([])
         self.__actions_queue = ActionQueue([],[],[])

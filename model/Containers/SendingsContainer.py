@@ -2,9 +2,9 @@ import marshal, os, hashlib
 from datetime import datetime
 
 class SendingsContainer:
-    def __init__(self, current_file_timestamp, path_to_container = '../AuxElements/sendings'):
+    def __init__(self, current_start_timestamp, path_to_container = '../AuxElements/sendings'):
         self.__path_to_container = path_to_container
-        self.__current_start_timestamp = current_file_timestamp
+        self.__current_start_timestamp = current_start_timestamp
         self.create_file_if_absent()
 
     def create_file_if_absent(self):
@@ -43,7 +43,11 @@ class SendingsContainer:
         key = self.get_key(text, images)
         if key in sendings_data:
             if 'sendings' in sendings_data[key]:
-                return sendings_data[key]['sendings']
+                resendings = []
+                for sending in sendings_data[key]['sendings']:
+                    if sending['timestamp'] < self.__current_start_timestamp:
+                        resendings.append(sending)
+                return resendings
 
 
 

@@ -131,7 +131,7 @@ class PostToGroupModel(QObject):
                 self.__current_post_text = post.text
                 self.__current_uploaded_photos = self.get_uploaded_photos_paths(post.list_of_photos)
                 self.__current__resendings = self.__sending_container.get_sendings_for_post(post.text, self.__current_uploaded_photos)
-                if self.__current__resendings is not None:
+                if self.__current__resendings is not None and len(self.__current__resendings) > 0:
                     resending_btn_label = self.get_label_to_show_on_resendings(self.__current__resendings)
                     self.__post_to_group_win_operator.show_hint_about_resendings(resending_btn_label)
                 else:
