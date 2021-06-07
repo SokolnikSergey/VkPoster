@@ -122,7 +122,7 @@ class PostToGroupModel(QObject):
         timestamps = []
         for sending in resendings:
             timestamps.append(int(sending['timestamp']))
-        label_to_show = f"Resend {len(resendings)} (last at {datetime.fromtimestamp(max(timestamps))})"
+        label_to_show = f"Resend {len(resendings)} for the current post (last at {datetime.fromtimestamp(max(timestamps))})"
         return label_to_show
 
     def append_resend_by_post(self, post_text):
