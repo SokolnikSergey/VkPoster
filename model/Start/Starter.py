@@ -87,6 +87,7 @@ class MainStarter(QObject):
         self.__vk_operator.action_has_failed.connect(
             self.__leisurely_queue_executor.notify_suscribers_about_changes_of_amount)
         self.__vk_operator.action_has_failed.connect(self.__leisurely_queue_executor.last_action_has_executed)
+        self.__vk_operator.update_resend_button_state.connect(self.__post_to_group_model.append_resend_by_post)
         self.__settings_model.update_settings.connect(self.__config_parser_vk_operations.update_values)
         self.__start_choice_model.change_account.connect(self.get_token)
         self.__vk_operator.actions_delayed.connect(self.__action_delayer.write_all_action_to_file)
