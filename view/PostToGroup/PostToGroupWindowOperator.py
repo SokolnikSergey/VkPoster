@@ -142,6 +142,9 @@ class PostToGroupWindowOperator(QObject):
             counter += 1
         if the_same_groups and self.__last_scroll_state is not None:
             self.__window.list_group_widget.verticalScrollBar().setValue(self.__last_scroll_state)
+        if not the_same_groups:
+            self.__window.check_box_all_ticks_groups.setChecked(False)
+            self.add_all_ticks()
 
     def add_items_to_post_list_widget(self,posts):
         for post in posts:
