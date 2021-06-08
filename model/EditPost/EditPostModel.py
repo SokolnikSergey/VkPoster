@@ -4,7 +4,7 @@ from view.EditPost.EditPostWindow import EditPostWindow
 from controller.EditPost.EditPostController import EditPostController
 from model.EditPost.EditPostBinder import EditPostBinder
 from model.PhotoConvertionOperations.PhotoConvertionOperations import PhotoConvertionOperations
-
+from model.DBOperations.DBOperations import DBOperations
 
 class EditPostModel(QObject):
 
@@ -15,13 +15,13 @@ class EditPostModel(QObject):
     occured_warning = pyqtSignal(str,object,tuple) ##signal to fill warning pop-up message
                                                     #(str = text,object = fix method
                                                     # tuple = params for fix method)
-    def __init__(self):
+    def __init__(self, db):
         super(EditPostModel, self).__init__()
         self.__source_text = ""
         self.__source_list_of_photos = []
         self.__view_operator = None
         self.create_view()
-
+        self.__db = db
         self.__binder = EditPostBinder(self,self.__view_operator)
 
     def save_changed_post(self,text,list_of_photos):
@@ -31,7 +31,12 @@ class EditPostModel(QObject):
         is_allowed_text = EditPostController.is_allowed_text(text)
         is_post_changed = EditPostController.is_post_changed(self.__source_text,text,self.__source_list_of_photos,list_of_photos)
 
-        if is_allowed_pictutes and is_allowed_text and is_post_changed:
+        texts = []
+        for record in DBOperations.read_all_records(self.__db):
+            texts.append(record[0].strip())
+        text_for_post_is_uniq = text.strip() not in texts
+
+        if is_allowed_pictutes and is_allowed_text and is_post_changed and text_for_post_is_uniq:
             if self.__source_list_of_photos == [] and self.__source_text == "":
                 self.post_added.emit(text, path_new_images)
             else:
@@ -48,6 +53,10 @@ class EditPostModel(QObject):
             if not is_post_changed:
                 self.occured_warning.emit("There are no changes compared to the previous",
                                           None,())
+
+            if not text_for_post_is_uniq:
+                self.occured_warning.emit("The post with the text is already exists. Text should be uniq",
+                                          None, ())
 
     def create_view(self):
         self.__view_operator = EditPostViewOperator(EditPostWindow())

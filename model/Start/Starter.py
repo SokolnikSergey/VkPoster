@@ -209,7 +209,7 @@ class MainStarter(QObject):
                                                            self.__post_container)
 
     def create_edit_post_model(self):
-        self.__edit_post_model = EditPostModel()
+        self.__edit_post_model = EditPostModel(self.__posts_db)
 
     def create_action_executors(self,session_data):
         self.__photo_manager = PhotoManager(self.__logger,self.__config_container.photo_complience_path,
@@ -218,8 +218,10 @@ class MainStarter(QObject):
         self.__vk_operator = VkOperator(self.__logger,self.__vk_session_data,self.__group_container,
         session_data.vk_api,self.__photo_manager,self.__sending_container )
 
+
+        self.__posts_db = shelve.open(self.__config_container.post_container_path)
         self.__action_executor = ActionExecutor(self.__vk_operator,StorageOperator(self.__logger,
-                    self.__post_container,shelve.open(self.__config_container.post_container_path)))
+                    self.__post_container,self.__posts_db))
 
         self.__hurriedly_queue_executor = HurriedlyQueueExecutor(
             self.__actions_queue,[],self.__action_executor)
