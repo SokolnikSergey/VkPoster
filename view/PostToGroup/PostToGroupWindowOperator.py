@@ -168,6 +168,7 @@ class PostToGroupWindowOperator(QObject):
 
     def clear_groups_list_widget(self):
         self.__last_cleared_groups = []
+        self.__last_group_states = []
 
         self.__last_scroll_state = self.__window.list_group_widget.verticalScrollBar().value()
         for x in range(self.__window.list_group_widget.count()):
