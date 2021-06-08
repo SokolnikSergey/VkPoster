@@ -145,6 +145,7 @@ class PostToGroupWindowOperator(QObject):
         if not the_same_groups:
             self.__window.check_box_all_ticks_groups.setChecked(False)
             self.add_all_ticks()
+        self.activate_btn_search_groups()
 
     def add_items_to_post_list_widget(self,posts):
         for post in posts:
@@ -182,6 +183,7 @@ class PostToGroupWindowOperator(QObject):
 
     def search_groups_clicked(self):
         self.search_groups_signal.emit(self.__window.line_post_name.text())
+        self.deactivate_btn_search_groups()
 
         if not self.compare_new_with_previous_text(self.__window.line_post_name.text()):
             self.activate_send_posts()
@@ -214,8 +216,14 @@ class PostToGroupWindowOperator(QObject):
     def deactivate_send_posts(self):
         self.__window.btn_start_spam.setEnabled(False)
 
+    def deactivate_btn_search_groups(self):
+        self.__window.btn_search_groups.setEnabled(False)
+
     def activate_send_posts(self):
         self.__window.btn_start_spam.setEnabled(True)
+
+    def activate_btn_search_groups(self):
+        self.__window.btn_search_groups.setEnabled(True)
 
     def show_upload_image_text(self):
         self.__window.blinking_label.info_label.show()
