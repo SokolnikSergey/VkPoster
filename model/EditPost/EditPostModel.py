@@ -34,7 +34,14 @@ class EditPostModel(QObject):
         texts = []
         for record in DBOperations.read_all_records(self.__db):
             texts.append(record[0].strip())
-        text_for_post_is_uniq = text.strip() not in texts
+
+        if self.__source_list_of_photos == [] and self.__source_text == "":
+            text_for_post_is_uniq = text.strip() not in texts
+        else:
+            if text.strip() == self.__source_text.strip():
+                text_for_post_is_uniq = True
+            else:
+                text_for_post_is_uniq = text.strip() not in texts
 
         if is_allowed_pictutes and is_allowed_text and is_post_changed and text_for_post_is_uniq:
             if self.__source_list_of_photos == [] and self.__source_text == "":
