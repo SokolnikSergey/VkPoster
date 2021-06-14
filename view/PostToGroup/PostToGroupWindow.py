@@ -34,8 +34,7 @@ class PostToGroupWindow(QWidget):
         self.btn_help.setStyleSheet("color: rgb(0,0,255)")
 
 
-        self.btn_recover_actions = QPushButton("Recover Delayed Actions",self)
-       # self.btn_recover_actions.setStyleSheet("color: rgb(200,20,255)")
+        self.btn_recover_actions = QPushButton("Recover Delayed Actions(from previous start)",self)
 
         self.list_post_widget = ListWidgetCustomScroll()
 
@@ -52,7 +51,7 @@ class PostToGroupWindow(QWidget):
         self.line_post_name  = QLineEdit()
         self.btn_back = QPushButton("Back",self)
         self.btn_back.setStyleSheet("background-color: rgb(255,167,167)")
-        self.btn_read_all_records = QPushButton("Recover saved posts", self)
+        self.btn_read_all_records = QPushButton("Recover your saved before posts", self)
 
         self.primary_group_key_label = QLabel("Input primary word of group")
         self.btn_search_groups = QPushButton("Search Groups")
