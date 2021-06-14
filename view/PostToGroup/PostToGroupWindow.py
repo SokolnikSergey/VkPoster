@@ -23,7 +23,7 @@ class PostToGroupWindow(QWidget):
 
 
     def setting_group_post_window(self):
-        self.setGeometry(100, 100, 956, 500)
+        self.setGeometry(100, 100, 956, 700)
         self.setWindowTitle("Send Posts To Groups")
 
     def create_buttons_and_labels(self):
@@ -54,6 +54,11 @@ class PostToGroupWindow(QWidget):
 
         self.primary_group_key_label = QLabel("Input primary word of group")
         self.btn_search_groups = QPushButton("Search Groups")
+
+        self.posts_label = QLabel("Posts to send:")
+        self.groups_label = QLabel("Searched groups:")
+
+
 
         self.blinking_label = BlinkingText('Images for post are in progress of uploading...')
 
@@ -98,9 +103,11 @@ class PostToGroupWindow(QWidget):
         self.qv_box = QVBoxLayout()
         self.qv_box.addLayout(self.qh_box0)
         self.qv_box.addLayout(self.qh_box3)
+        self.qv_box.addWidget(self.posts_label)
         self.qv_box.addWidget(self.list_post_widget)
         self.qv_box.addLayout(self.qh_box2)
         self.qv_box.addLayout(self.qh_box4)
+        self.qv_box.addWidget(self.groups_label)
         self.qv_box.addWidget(self.list_group_widget)
 
         self.qv_box.addWidget(self.btn_start_spam)
