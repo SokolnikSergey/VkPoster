@@ -43,6 +43,8 @@ class PostToGroupWindow(QWidget):
         self.list_group_widget.setMinimumHeight(150)
 
         self.btn_start_spam = QPushButton("Send Posts",self)
+        self.btn_start_spam.setStyleSheet("background-color: rgb(123, 227, 150)")
+
         self.btn_start_spam.setFont(QFont("Arial",20))
         self.btn_start_spam.setMinimumHeight(50)
 
