@@ -37,7 +37,7 @@ from model.Settings.SettingsModel import SettingsModel
 from model.Logger.Logger import MyLogger
 from model.ProgressBinder.ProgressBinder import ProgressBinder
 from model.Containers.SendingsContainer import SendingsContainer
-import sys,shelve,os, subprocess
+import sys,shelve,webbrowser
 
 from datetime import datetime
 
@@ -98,11 +98,7 @@ class MainStarter(QObject):
         self.__vk_operator.uploaded_thread.data_have_uploaded_to_vk.connect(self.__post_to_group_model.hide_start_upload_image)
 
     def start_helper(self):
-        if sys.platform == "win32":
-            os.startfile("../AuxElements/Helper.chm")
-        else:
-            opener = "open" if sys.platform == "darwin" else "xdg-open"
-            subprocess.call([opener, "../AuxElements/Helper.chm"])
+        webbrowser.open("https://github.com/SokolnikSergey/VkPoster/wiki")
 
     def inform_relogin_if_user_blocked(self, vk_api):
         try:
