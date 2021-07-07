@@ -72,7 +72,7 @@ class PostToGroupWindowOperator(QObject):
             i += 1
 
     def toggle_post_list_checked(self):
-        item = self.__window.list_post_widget.currentItem()
+        item = self.current_post_item()
         if item.checkState():
             item.setCheckState(Qt.Unchecked)
         else:
@@ -237,6 +237,9 @@ class PostToGroupWindowOperator(QObject):
 
     def hide_hint_about_resendings(self):
         self.__window.remove_resending_button()
+
+    def current_post_item(self):
+        return self.__window.list_post_widget.currentItem()
 
     ###########################
 

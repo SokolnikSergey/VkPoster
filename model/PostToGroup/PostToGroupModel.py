@@ -127,7 +127,7 @@ class PostToGroupModel(QObject):
 
     def append_resend_by_post(self, post_text):
         for post in self.__post_container.list_of_posts:
-            if post.text == post_text:
+            if post.text == post_text and self.__post_to_group_win_operator.current_post_item().whatsThis() == post_text:
                 self.__current_post_text = post.text
                 self.__current_uploaded_photos = self.get_uploaded_photos_paths(post.list_of_photos)
                 self.__current__resendings = self.__sending_container.get_sendings_for_post(post.text, self.__current_uploaded_photos)
