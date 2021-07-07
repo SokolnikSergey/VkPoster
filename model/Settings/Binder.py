@@ -15,3 +15,4 @@ class Binder:
         self.__view.min_amount_users_changed.connect(self.__model.min_amount_of_users_changed)
         self.__view.timeout_changed.connect(self.__model.timeout_changed)
         self.__view.each_to_each_changed.connect(self.__model.each_to_each_changed)
+        self.__view.limit_reached_just_once_changed.connect(self.__model.limit_reached_just_once_changed)

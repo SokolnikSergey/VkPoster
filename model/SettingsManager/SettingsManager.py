@@ -22,6 +22,9 @@ class SettingsManager(Subscriber):
     def each_post_to_each_groups_changed(self,new_e_to_e):
         ActionMaker.EACH_POST_TO_EACH_GROUP = new_e_to_e
 
+    def limit_reached_just_once_changed(self,new_limit_reached_once):
+        ActionMaker.SHOW_LIMIT_REACHED_JUST_ONCE = new_limit_reached_once
+
     def subscribe(self, publisher):
         publisher.add_subscriber(self)
 

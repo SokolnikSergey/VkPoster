@@ -19,6 +19,7 @@ class ConfigParserVkOperationGathering:
             self.read_max_amount_of_groups_to_search()
             self.read_min_amount_of_users_in_group()
             self.read_each_post_to_each_groups()
+            self.read_just_once_limit_reached()
             self.read_timeout_beetween_operations()
 
     def write_to_config_file(self):
@@ -42,6 +43,8 @@ class ConfigParserVkOperationGathering:
         self.__config_parser.set("VkOperations", "TimeOutBetweenOperations", '5')
         self.__config_parser.set("VkOperations", "MinAmountUsersInGroup", '200')
         self.__config_parser.set("VkOperations", "EachPostToEachGroups", '0')
+        self.__config_parser.set("VkOperations", "JustOnceLimitReached", '0')
+
 
         self.write_to_config_file()
 
@@ -80,6 +83,13 @@ class ConfigParserVkOperationGathering:
                 each_to_each = self.__config_parser["VkOperations"]["EachPostToEachGroups"]
                 if (each_to_each is not None) and self.__config_container:
                     self.__config_container.each_to_each = int(each_to_each)
+
+    def read_just_once_limit_reached(self):
+        if self.__config_parser is not None:
+            if "VkOperations" in self.__config_parser:
+                just_once_limit = self.__config_parser["VkOperations"]["JustOnceLimitReached"]
+                if (just_once_limit is not None) and self.__config_container:
+                    self.__config_container.limit_reached_just_once = int(just_once_limit)
 
 
     def write_country_number_from_ini(self,country_number):
@@ -124,13 +134,21 @@ class ConfigParserVkOperationGathering:
                 self.write_to_config_file()
 
 
+    def write_show_limit_reached_just_once(self, limit_reached):
+        self.__config_container.limit_reached_just_once = limit_reached
+        limit_reached = str(limit_reached)
+        if (self.__config_parser) and "VkOperations" in self.__config_parser:
+            if (isinstance(limit_reached, str)):
+                self.__config_parser["VkOperations"]["JustOnceLimitReached"] = limit_reached
+                self.write_to_config_file()
+
     def update_values(self,values):
         self.write_country_number_from_ini(values[0])
         self.write_max_amount_of_groups_to_search(values[1])
         self.write_min_amount_users_in_group(values[2])
         self.write_timeout_beetween_operations(values[3])
         self.write_each_post_to_each_groups(values[4])
-
+        self.write_show_limit_reached_just_once(values[5])
 
     def write_element(self,section,element,value):
         self.__config_parser[section][element] = value

@@ -70,6 +70,7 @@ class SettingsWindow(QWidget):
 
     def create_check_boxes(self):
         self.each_to_each_check_box = QCheckBox("Each Post to Each Group",self)
+        self.just_once_limit_reached_check_box = QCheckBox("Show sendings limit reached just once", self)
 
     def create_lcd_numbers(self):
         self.lcd_timeout  = QLCDNumber(self)
@@ -102,6 +103,9 @@ class SettingsWindow(QWidget):
         self.qh_each = QHBoxLayout()
         self.qh_each.addWidget(self.each_to_each_check_box)
 
+        self.qh_limit_reached = QHBoxLayout()
+        self.qh_limit_reached.addWidget(self.just_once_limit_reached_check_box)
+
         self.qh_save_back = QHBoxLayout()
         self.qh_save_back.addWidget(self.btn_back)
         self.qh_save_back.addWidget(self.save_btn)
@@ -117,6 +121,7 @@ class SettingsWindow(QWidget):
         self.qv_box1.addWidget(self.lbl_amount_of_users,1)
         self.qv_box1.addLayout(self.qh_min_amount_users,1)
         self.qv_box1.addLayout(self.qh_each)
+        self.qv_box1.addLayout(self.qh_limit_reached)
         self.qv_box1.addLayout(self.qh_save_back)
 
         self.setLayout(self.qv_box1)

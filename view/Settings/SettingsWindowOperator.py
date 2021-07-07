@@ -11,6 +11,7 @@ class SettingsWindowOperator(QObject):
     max_amount_groups_changed = pyqtSignal(int)
     min_amount_users_changed= pyqtSignal(int)
     each_to_each_changed= pyqtSignal(int)
+    limit_reached_just_once_changed = pyqtSignal(int)
 
     def __init__(self,window):
         super(SettingsWindowOperator,self).__init__()
@@ -25,6 +26,7 @@ class SettingsWindowOperator(QObject):
         self.__window.min_amount_users_scroll.setValue(values[2])
         self.__window.timeout_scroll.setValue(values[3])
         self.__window.each_to_each_check_box.setCheckState(values[4])
+        self.__window.just_once_limit_reached_check_box.setCheckState(values[5])
 
         self.__window.lcd_max_amount.display(values[1])
         self.__window.lcd_min_amount_users.display(values[2])
@@ -36,6 +38,7 @@ class SettingsWindowOperator(QObject):
         self.__window.min_amount_users_scroll.valueChanged.connect(self.change_min_amount_users_scroll_position)
         self.__window.each_to_each_check_box.stateChanged.connect(self.each_to_each_changed)
         self.__window.country_id_combobx.currentIndexChanged.connect(self.country_id_changed)
+        self.__window.just_once_limit_reached_check_box.stateChanged.connect(self.limit_reached_just_once_changed)
 
         self.__window.window_closed.connect(self.close_settings_window)
         self.__window.btn_back.clicked.connect(self.close_settings_window)

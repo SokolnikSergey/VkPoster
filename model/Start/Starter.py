@@ -193,7 +193,8 @@ class MainStarter(QObject):
                                   self.__config_container_vk_operations.max_amount_of_groups,
                                   self.__config_container_vk_operations.min_amount_users_in_group,
                                   self.__config_container_vk_operations.timeout,
-                                  self.__config_container_vk_operations.each_to_each)
+                                  self.__config_container_vk_operations.each_to_each,
+                                  self.__config_container_vk_operations.limit_reached_just_once)
 
     def create_post_to_group(self):
         self.__post_to_group_model = PostToGroupModel(PostContainerWithQImages([]),

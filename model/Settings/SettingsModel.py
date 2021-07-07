@@ -8,8 +8,8 @@ class SettingsModel(QObject):
     setting_window_closed = pyqtSignal()
     update_settings = pyqtSignal(list)
 
-
-    def __init__(self,country_id = 3,max_amount_of_groups = 50,min_amount_of_users = 100, timeout_between_operations = 10,each_to_each = 0):
+    def __init__(self, country_id = 3, max_amount_of_groups = 50, min_amount_of_users = 100,
+                 timeout_between_operations = 10, each_to_each = 0, limit_reached_just_once = 0):
         super(SettingsModel, self).__init__()
 
         self.__country_id = country_id
@@ -17,7 +17,7 @@ class SettingsModel(QObject):
         self.__min_amount_of_users = min_amount_of_users
         self.__timeout_between_operations = timeout_between_operations
         self.__each_to_each = each_to_each
-
+        self.__limit_reached_just_once = limit_reached_just_once
         self.__on_start_settings_values = self.collect_values()
         self.create_view()
 
@@ -72,6 +72,13 @@ class SettingsModel(QObject):
         self.__each_to_each = new_each_to_each
 
 
+    @property
+    def limit_reached_just_once(self):
+        return self.__limit_reached_just_once
+
+    def limit_reached_just_once_changed(self,new_limit_reached_just_once):
+        self.__limit_reached_just_once = new_limit_reached_just_once
+
 
 
     def collect_values(self):
@@ -81,6 +88,7 @@ class SettingsModel(QObject):
         list_of_settings.append(self.__min_amount_of_users)
         list_of_settings.append(self.__timeout_between_operations)
         list_of_settings.append(self.__each_to_each)
+        list_of_settings.append(self.__limit_reached_just_once)
 
         return list_of_settings
 
@@ -88,7 +96,6 @@ class SettingsModel(QObject):
         list_of_settings = self.collect_values()
         self.__on_start_settings_values = self.collect_values()
         self.update_settings.emit(list_of_settings)
-
 
     def show(self):
         self.set_begins_view_values(self.__on_start_settings_values)

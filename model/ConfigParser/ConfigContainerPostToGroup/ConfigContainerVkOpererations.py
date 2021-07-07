@@ -3,12 +3,13 @@ from model.Interfaces.Publisher import Publisher
 class ConfigContainerVkOperations(Publisher):
 
     def __init__(self, country_number = 3,max_amount_of_groups = 50 ,timeout = 5
-                 ,min_amount_users_in_group = 100 ,e_to_e = False):
+                 ,min_amount_users_in_group = 100 ,e_to_e = False, limit_reached_just_once = 0):
         self.__country_number = country_number
         self.__max_amount_of_groups = max_amount_of_groups
         self.__timeout = timeout
         self.__min_amount_users_in_group = min_amount_users_in_group
         self.__each_to_each = e_to_e
+        self.__limit_reached_just_once = limit_reached_just_once
 
         self.__settings_subscriber = []
 
@@ -64,6 +65,16 @@ class ConfigContainerVkOperations(Publisher):
             self.__each_to_each = new_each_to_each
             self.each_to_each_changed()
 
+    @property
+    def limit_reached_just_once(self):
+        return self.__limit_reached_just_once
+
+    @limit_reached_just_once.setter
+    def limit_reached_just_once(self, new_limit_reached_just_once):
+        if (isinstance(new_limit_reached_just_once, (str, int))):
+            self.__limit_reached_just_once = new_limit_reached_just_once
+            self.limit_reached_just_once_changed()
+
     def country_number_changed(self):
         for subscriber in self.__settings_subscriber:
             subscriber.country_id_changed(self.__country_number)
@@ -81,14 +92,19 @@ class ConfigContainerVkOperations(Publisher):
             subscriber.min_amount_users_in_group_changed(self.__min_amount_users_in_group)
 
     def each_to_each_changed(self):
-        for subscriber in self.__settings_subscriber:
+       for subscriber in self.__settings_subscriber:
             subscriber.each_post_to_each_groups_changed(self.__each_to_each)
+
+    def limit_reached_just_once_changed(self):
+        for subscriber in self.__settings_subscriber:
+            subscriber.limit_reached_just_once_changed(self.__limit_reached_just_once)
 
     def update_all_settings(self,subscriber):
         subscriber.country_id_changed(self.__country_number)
         subscriber.max_amount_of_group_changed(self.__max_amount_of_groups)
         subscriber.timeout_changed(self.__timeout)
         subscriber.each_post_to_each_groups_changed(self.each_to_each)
+        subscriber.limit_reached_just_once_changed(self.limit_reached_just_once)
 
     def remove_subscriber(self, subscriber):
         if subscriber in self.__settings_subscriber :
