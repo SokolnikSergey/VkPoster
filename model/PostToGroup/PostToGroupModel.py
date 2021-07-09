@@ -50,6 +50,7 @@ class PostToGroupModel(QObject):
         self.__compliances_container = compliance_container
         self.action_maker = action_maker
 
+
         self.__group_container_subscriber = GroupContainerSubscriber \
             (self.__group_container)
 
@@ -133,7 +134,7 @@ class PostToGroupModel(QObject):
                 self.__current__resendings = self.__sending_container.get_sendings_for_post(post.text, self.__current_uploaded_photos)
                 if self.__current__resendings is not None and len(self.__current__resendings) > 0:
                     resending_btn_label = self.get_label_to_show_on_resendings(self.__current__resendings)
-                    self.__post_to_group_win_operator.show_hint_about_resendings(resending_btn_label)
+                    self.__post_to_group_win_operator.show_hint_about_resendings(resending_btn_label, post_text)
                 else:
                     self.__post_to_group_win_operator.hide_hint_about_resendings()
 
@@ -141,7 +142,7 @@ class PostToGroupModel(QObject):
         groups = []
         for sending in self.__current__resendings:
             groups.append(Group(gid=sending['group_id']))
-        self.action_maker.create_send_posts_to_groups_actions(groups, [Post(self.__current_uploaded_photos,self.__current_post_text)])
+        self.action_maker.create_send_posts_to_groups_actions(groups, [Post(self.__current_uploaded_photos,self.__current_post_text)], True)
 
     def snapping_signals(self):
         self.__post_container_subscriber.posts_added.connect(self.add_posts_to_post_container)

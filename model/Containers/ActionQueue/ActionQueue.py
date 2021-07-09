@@ -32,9 +32,12 @@ class ActionQueue:
     def size_of_edit_container_queue(self):
         return len(self.__edit_containers_queue)
 
-    def add_action_to_leisurely_queue(self,action):
+    def add_action_to_leisurely_queue(self,action, prepend = False):
         if(isinstance(action,Action)):
-            self.__leisurely_queue.append(action)
+            if prepend:
+                self.__leisurely_queue = [action] + self.__leisurely_queue
+            else:
+                self.__leisurely_queue.append(action)
 
         if(isinstance(action,list) and all(isinstance(act,Action) for act in  action)):
             self.__leisurely_queue.extend(action)

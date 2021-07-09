@@ -29,7 +29,7 @@ class ActionMaker:
 
         ActionMaker.TIME_OUT_INTERNAL_OPERATIONS  = t_o_internal_operations
 
-    def create_send_posts_to_groups_actions(self, groups, posts):
+    def create_send_posts_to_groups_actions(self, groups, posts, asap = False):
         for pair in self.get_group_and_post_to_send(groups, posts):
             group, post = pair
 
@@ -38,7 +38,7 @@ class ActionMaker:
 
             if post_to_group_hash not in self.__scheduled_actions_hashes: # to exclude duplicated sendings during one start
                 self.__action_queue.add_action_to_leisurely_queue(
-                    self.create_send_post_to_group_action(group.gid, post.text, post.list_of_photos))
+                    self.create_send_post_to_group_action(group.gid, post.text, post.list_of_photos), asap)
             self.__scheduled_actions_hashes.append(post_to_group_hash)
 
     def get_group_and_post_to_send(self, groups, posts):

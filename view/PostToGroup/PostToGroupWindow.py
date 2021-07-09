@@ -59,11 +59,9 @@ class PostToGroupWindow(QWidget):
         self.posts_label = QLabel("Posts to send:")
         self.groups_label = QLabel("Searched groups:")
 
-
-
         self.blinking_label = BlinkingText('Images for post are in progress of uploading...')
 
-    def append_resending_button(self, button_text = 'resend posts'):
+    def append_resending_button(self, button_text = 'resend posts', enabled = True):
         if not self.__resend_button_on_ui:
             self.btn_make_resendings = QPushButton(button_text, self)
             self.btn_make_resendings.clicked.connect(self.btn_make_resendings_clicked)
@@ -71,6 +69,7 @@ class PostToGroupWindow(QWidget):
             self.__resend_button_on_ui = True
         else:
             self.btn_make_resendings.setText(button_text)
+        self.btn_make_resendings.setEnabled(enabled)
 
     def remove_resending_button(self):
         if self.__resend_button_on_ui:

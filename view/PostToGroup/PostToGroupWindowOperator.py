@@ -26,6 +26,7 @@ class PostToGroupWindowOperator(QObject):
         self.__last_cleared_groups = []
         self.__last_group_states = []
         self.__last_scroll_state = None
+        self.__disabled_resend_post_buttons_txts = []
 
     def snapping_internal_signals(self):
         self.__window.list_post_widget.itemPressed.connect(self.toggle_post_list_checked)
@@ -43,6 +44,8 @@ class PostToGroupWindowOperator(QObject):
         self.__window.btn_back.clicked.connect(self.btn_back_clicked)
         self.__window.btn_recover_actions.clicked.connect(self.btn_recover_actions_clicked)
         self.__window.btn_make_resendings_clicked.connect(self.btn_make_resendings)
+        self.__window.btn_make_resendings_clicked.connect(self.disable_hint_about_resendings)
+        self.__window.btn_make_resendings_clicked.connect(self.store_btn_resend_disabled)
 
     @property
     def previous_text(self):
@@ -232,14 +235,22 @@ class PostToGroupWindowOperator(QObject):
     def hide_upload_image_text(self):
         self.__window.blinking_label.info_label.hide()
 
-    def show_hint_about_resendings(self, text_to_show):
-        self.__window.append_resending_button(text_to_show)
+    def show_hint_about_resendings(self, text_to_show, post_text):
+        self.__window.append_resending_button(text_to_show, post_text not in self.__disabled_resend_post_buttons_txts)
 
     def hide_hint_about_resendings(self):
         self.__window.remove_resending_button()
 
+    def disable_hint_about_resendings(self):
+        self.__window.btn_make_resendings.setEnabled(False)
+
     def current_post_item(self):
         return self.__window.list_post_widget.currentItem()
+
+    def store_btn_resend_disabled(self):
+        current_post_item = self.current_post_item()
+        self.__disabled_resend_post_buttons_txts.append(current_post_item.whatsThis())
+
 
     ###########################
 
