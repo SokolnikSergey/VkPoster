@@ -237,7 +237,7 @@ class MainStarter(QObject):
         self.__actions_queue = ActionQueue([],[],[])
 
     def create_action_binder(self):
-        self.__action_maker = ActionMaker(self.__actions_queue,5,0,0)
+        self.__action_maker = ActionMaker(self.__actions_queue,self.__config_container_vk_operations.timeout,0,0)
         self.__post_to_group_model.action_maker = self.__action_maker # dirty hack :(
         self.__action_binder = ActionBinder(self.__post_to_group_model,self.__chose_post_for_edit,
                                             self.__edit_post_model,self.__action_maker)
