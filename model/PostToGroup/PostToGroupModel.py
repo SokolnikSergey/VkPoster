@@ -89,6 +89,7 @@ class PostToGroupModel(QObject):
         posts =  self.recover_posts_by_texts(posts_texts_for_send)
         if PostToGroupController.is_allowed_send_posts_to_group(posts,groups):
             self.send_posts_to_groups_signal.emit(groups,posts)
+            self.__post_to_group_win_operator.deactivate_send_posts()
         else:
             self.occured_warning.emit("You should choose at least one group "
                                       "and one post for sending", None, ())

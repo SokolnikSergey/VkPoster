@@ -33,8 +33,6 @@ class PostToGroupWindowOperator(QObject):
 
         self.__window.list_group_widget.itemPressed.connect(self.toggle_group_list_checked)
         self.__window.btn_search_groups.clicked.connect(self.search_groups_clicked)
-
-        self.__window.btn_start_spam.clicked.connect(self.deactivate_send_posts)
         self.__window.btn_start_spam.clicked.connect(self.post_to_group_clicked)
 
         self.__window.btn_edit_post.clicked.connect(self.btn_edit_post_clicked)
