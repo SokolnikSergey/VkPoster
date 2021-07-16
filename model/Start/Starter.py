@@ -213,7 +213,7 @@ class MainStarter(QObject):
                             self.__vk_session_data,PhotoCompliancesContainer([],[]),session_data.album_id )
 
         self.__vk_operator = VkOperator(self.__logger,self.__vk_session_data,self.__group_container,
-        session_data.vk_api,self.__photo_manager,self.__sending_container )
+        session_data.vk_api,self.__photo_manager,self.__sending_container, self.__config_container_vk_operations )
 
 
         self.__posts_db = shelve.open(self.__config_container.post_container_path)

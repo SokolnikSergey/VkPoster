@@ -8,8 +8,14 @@ from model.Threads.DataUploadThread import DataUploadThread
 from model.VkOperations.VkOperations import VkOperations
 from model.Converters.ConverterDataFromServerVk import ConverterDataFromServerVk
 from model.Interfaces.Subscriber import Subscriber
+from os import path
+from datetime import datetime
+
 
 class VkOperator(ExecuteAble,QObject,Subscriber):
+
+    PATH_TO_LIMIT_REACHED_FILE = "../AuxElements/too_many_recipients_timestamp"
+    PROGRAMM_STARTED_AT_PATH = "../AuxElements/start_timestamp"
 
     groups_without_post_received = pyqtSignal(list)
     action_has_done = pyqtSignal()
@@ -18,7 +24,7 @@ class VkOperator(ExecuteAble,QObject,Subscriber):
     actions_delayed= pyqtSignal()
     update_resend_button_state = pyqtSignal(str)
 
-    def __init__(self,logger,session_data_publisher,group_container,vk_api,photo_manager, sending_container):
+    def __init__(self,logger,session_data_publisher,group_container,vk_api,photo_manager, sending_container, config_vk_operations):
         super(VkOperator, self).__init__()
 
         self.__logger = logger
@@ -27,6 +33,7 @@ class VkOperator(ExecuteAble,QObject,Subscriber):
         self.__group_container = group_container
         self.__vk_api = vk_api
         self.__photo_manager = photo_manager
+        self.__config_vk_operations = config_vk_operations
 
         self.create_threads()
         self.snapping_threads_signals()
@@ -93,11 +100,33 @@ class VkOperator(ExecuteAble,QObject,Subscriber):
             self.action_has_done.emit()
         except Exception as ex:
             self.action_has_failed.emit()
-            if str(ex).split(".")[0] == '220' :
-                self.occured_warning.emit("Too many recipients.You have used all your resources(100 posts - max )\nfor the day. Please continue tomorrow!\n"
-                                          "Press Ok to delay actions for next time", self.actions_delayed_accepted, ())
+            if str(ex).split(".")[0] == '220':
+                self.sending_limit_reached()
+
         self.__sending_container.append_sending_to_file(data[1], data[2], data[0])
         self.update_resend_button_state.emit(data[1])
+
+    def is_limit_reached_first_shown(self):
+        f = open("../AuxElements/start_timestamp", "r")
+        start_programm_timestamp = int(str.strip(f.read()))
+        f.close()
+        if path.exists(VkOperator.PATH_TO_LIMIT_REACHED_FILE):
+            f = open(VkOperator.PATH_TO_LIMIT_REACHED_FILE, "r")
+            too_many_recipients_timestamp = int(str.strip(f.read()))
+            f.close()
+            if start_programm_timestamp < too_many_recipients_timestamp:
+                return False
+        with open(VkOperator.PATH_TO_LIMIT_REACHED_FILE, "w") as f:
+            f.write(str(int(datetime.timestamp(datetime.now()))))
+        return True
+
+
+    def sending_limit_reached(self):
+        if self.__config_vk_operations.limit_reached_just_once != 0 and not self.is_limit_reached_first_shown():
+            return
+        self.occured_warning.emit(
+            "Too many recipients.You have used all your resources(100 posts - max )\nfor the day. Please continue tomorrow!\n"
+            "Press Ok to delay actions for next time", self.actions_delayed_accepted, ())
 
     def actions_delayed_accepted(self):
         self.actions_delayed.emit()
