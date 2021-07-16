@@ -1,6 +1,7 @@
 from PyQt5.QtWidgets import QMessageBox
 from PyQt5.Qt import Qt
 from PyQt5.QtCore import QObject,pyqtSignal
+from PyQt5.QtGui import QIcon
 
 class ExceptionWarning(QMessageBox,QObject):
 
@@ -11,7 +12,7 @@ class ExceptionWarning(QMessageBox,QObject):
         super(ExceptionWarning, self).__init__()
         self.setText(message)
         self.setting_window()
-
+        self.setWindowIcon(QIcon('../../model/AuxElements/icon.png'))
         self.buttonClicked.connect(self.btn_clicked)
 
     def setting_window(self):
