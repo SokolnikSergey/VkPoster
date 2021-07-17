@@ -1,6 +1,12 @@
 model/AuxElements/*
-!/AuxElements/Helper.chm
+!model/AuxElements/Helper.chm
+!model/AuxElements/hqdefault.jpg
+!model/AuxElements/icon.png
+!model/AuxElements/in.ini
+!model/AuxElements/no_image.jpg
+!model/AuxElements/vk_settings.ini
 model/DB/*
+!model/DB/DelayedActions
 .idea/*
 *.pyc
 __pycache__/
