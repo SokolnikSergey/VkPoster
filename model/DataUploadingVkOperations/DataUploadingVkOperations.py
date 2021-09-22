@@ -23,4 +23,4 @@ class DataUploadingVkOperations:
 
     @staticmethod
     def getUploadURL(vk_api, album_id):
-        return vk_api.photos.getUploadServer(album_id=album_id, v='5.73')["upload_url"]
+        return vk_api.photos.getUploadServer(album_id=album_id, v='5.81')["upload_url"]

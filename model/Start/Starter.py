@@ -102,7 +102,7 @@ class MainStarter(QObject):
 
     def inform_relogin_if_user_blocked(self, vk_api):
         try:
-            vk_api.users.account.getInfo(v="5.73")
+            vk_api.users.account.getInfo(v="5.81")
         except Exception as ex:
             if str(ex).split(".")[0] == '5':
                 self.__accept_leave_app.set_texts("The account is blocked by VK", "Start another authorization?")

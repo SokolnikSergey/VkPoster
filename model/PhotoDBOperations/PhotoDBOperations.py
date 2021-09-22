@@ -22,6 +22,6 @@ class PhotoDBOperations:
         PhotoDBOperations.check_existance(db)
 
         file = open(db, "rb")
-        compliances = pickle.load(file )
+        compliances = pickle.load(file)
         file.close()
         return compliances

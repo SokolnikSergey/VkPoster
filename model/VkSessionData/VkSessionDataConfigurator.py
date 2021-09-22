@@ -55,11 +55,11 @@ class VkSessionDataConfigurator:
 
     def create_vk_api(self, token):
         session = vk.Session(token)
-        vk_api = vk.API(session=session,v="5.73")
+        vk_api = vk.API(session=session,v="5.81")
         return vk_api
 
     def update_account_data(self,new_vk_api):
-        data = new_vk_api.users.get(v="5.73", user_ids=new_vk_api.account.getProfileInfo(v="5.73")['id'], fields='photo_200')[0]
+        data = new_vk_api.users.get(v="5.81", user_ids=new_vk_api.account.getProfileInfo(v="5.81")['id'], fields='photo_200')[0]
         ava = self.download_photo(data["photo_200"])
         first_name = data["first_name"]
         last_name = data["last_name"]
@@ -87,12 +87,12 @@ class VkSessionDataConfigurator:
         self.__session_data_container.token = token
 
     def set_user_id(self,token):
-        req = self.__session_data_container.vk_api.users.get(access_token=token,v="5.73")
+        req = self.__session_data_container.vk_api.users.get(access_token=token,v="5.81")
         uid  = req[0]["id"]
         self.__session_data_container.user_id = uid
 
     def search_album_of_user_by_title(self,title,vk_api):
-        req = vk_api.photos.getAlbums(v="5.73")["items"]
+        req = vk_api.photos.getAlbums(v="5.81")["items"]
         for group in req:
             if group["title"] == title:
                 return group["id"]
@@ -104,7 +104,7 @@ class VkSessionDataConfigurator:
             if album_aid:
                 self.__session_data_container.album_id = album_aid
             else :
-                vk_api.photos.createAlbum(title = VkSessionDataConfigurator.PHOTO_ALBUM_NAME, privacy_view = 'owner', v='5.73')
+                vk_api.photos.createAlbum(title = VkSessionDataConfigurator.PHOTO_ALBUM_NAME, privacy_view = 'owner', v='5.81')
                 album_aid = self.search_album_of_user_by_title(VkSessionDataConfigurator.PHOTO_ALBUM_NAME,vk_api)
                 if album_aid :
                     self.__session_data_container.album_id = album_aid
